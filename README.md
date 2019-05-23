@@ -29,9 +29,3 @@ To start server, run:
 ```bash
 node server.js
 ```
-
-# NGSI-LD simulator
-We provide a simulator program that creates NGSI-LD entities. To start the simulator, run: 
-```bash
-node simulator/simulator.js
-```
