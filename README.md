@@ -20,4 +20,4 @@ node migrate.js
 To start server, run: 
 ```bash
 node server.js
-```D
+```
