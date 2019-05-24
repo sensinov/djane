@@ -235,31 +235,6 @@ const INDEXES_CONFIG = {
 
 const collectionNames = Object.keys(INDEXES_CONFIG); 
 
-let collections = []; 
-for (const collectionName of collectionNames) {
-  collections.push(collectionName); 
-}
-/*
-function createCollectionsIndex () {
-  return new Promise (function (resolve, reject){
-    let result = true; 
-    for (const collectionName of collectionNames) {
-      const indexesDefinitions = INDEXES_CONFIG[collectionName]
-      for (const { key, name } of indexesDefinitions) {
-        mongo.createIndex(collectionName, key, { name, background: true }, function(err, result){
-            if (err) {
-              return console.error(err); 
-              result = false; 
-              reject('error'); 
-            } else {
-              console.log('index', result, 'created', 'on', collectionName, 'collection'); 
-              resolve('ok'); 
-            }           
-        });
-      }
-    }
-  }); 
-} */ 
 
 function createCollectionsIndex () {
   let promises = []; 
@@ -292,9 +267,6 @@ function createCollectionsIndex () {
 
 function bootstrap (){
 	mongo.bootstrap(function (err, result){
-    /*const IndPromise = createCollectionsIndex(); 
-    IndPromise
-      .then(function(){console.log('done')}); */
     createCollectionsIndex();  
   });
 }
