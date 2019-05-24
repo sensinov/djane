@@ -100,11 +100,6 @@ function checkRegistrationInformation (registrationInfo, index, result) {
                             break; 
                         }
                     }
-                    /*registrationInfo[attributename].forEach(function (value) {
-                        if (typeof(value) !== 'string') {
-                            typeProperties = false; 
-                        }
-                    }); */
                     if (typeProperties == false) {
                         result.correct = false; 
                         result.errorMsg = "properties attribute elements must be of type string"; 
@@ -208,7 +203,6 @@ function csourceRegistrationValidator (reqBody) {
         errorMsg : ""
     }; 
     let date = null; 
-    //let regex = RegExp('^[a-zA-Z]+$'); Used to check additional properties for csourceRegistration. Not Handled yet
     /*
         Check mandatory attributes : type, information, endpoint
     */
@@ -286,13 +280,7 @@ function csourceRegistrationValidator (reqBody) {
                     result.correct = false; 
                     break; 
                 }
-            } /*else if (regex.test(attributename)) {
-                if (typeof(reqBody[attributename]) !== 'object') {
-                    result.errorMsg = attributename + " is badly typed. Should be a json object"; 
-                    result.correct = false; 
-                    break; 
-                }
-            }*/
+            }
             
             console.log("correct = " + result.correct);  
         }
