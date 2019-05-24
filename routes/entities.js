@@ -18,7 +18,6 @@
 
 const express = require ('express');
 const subscription=require('../notify/subscription');
-const config =require('../config/config');
 var entityValidator = require('../models/entityModel'); 
 const mongo = require('../lib/mongo'); 
 const db=mongo.getdb(); 
@@ -111,7 +110,6 @@ router.post('/entities', function (req, res) {
     console.log('post'); 
     console.log('body', req.body); 
     if (!JSON.parse(JSON.stringify(req.body))) {
-        console.log('*****'); 
         res.status(400); 
         res.send('Invalid Request - Not a valid json'); 
     } 
@@ -169,7 +167,6 @@ router.patch('/entities/:entityId/attrs/:attrId', function (req, res) {
 
 
 //DELETE /entities/{entityId}/attrs/{attrId}
-
 router.delete('/entities/:entityId', function (req, res) {
     db.collection('entities').findOneAndDelete({'id': req.params.entityId}, (err, result) => {
         if (err) {

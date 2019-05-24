@@ -18,7 +18,6 @@
 
 const express = require ('express');
 const subscription=require('../notify/subscription');
-const config =require('../config/config');
 var entityValidator = require('../models/entityModel'); 
 const mongo = require('../lib/mongo'); 
 const db=mongo.getdb(); 

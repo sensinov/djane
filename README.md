@@ -9,11 +9,21 @@ Open source implementation of ETSI ISG CIM standard known as NGSI-LD. An informa
 * Install MongoDB
 * Install Node.js
 
-# Configure
+
+* install mongodb (https://docs.mongodb.com/manual/installation/)
+
+## Play the migrations
+At this step, you will create indexes on collections before starting the server.
+Before you run the following command, you have to start mongo service and create a database. 
+As described in config file (/config/config.js), we start locally a mongo service and we create 'ngsi_ld_bd' database.  
+
 ```bash
-node configure.js
+npm run migrate
 ```
-# Start
+
+## NGSIL-LD server 
+To start server, run: 
 ```bash
-node server.js
+npm run start
 ```
+A server will start locally listenning on the port 3000. Port number is configured in config file (/config/config.js). 

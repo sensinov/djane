@@ -137,9 +137,6 @@ function fireEntity(entityType) {
 function sendData () {
     for (let i=1; i<=config.NbOfTypes; i++) {
         for (let j=1; j<=config.NbOfEntitiesInstances; j++) {
-            /*setInterval( function () {
-                fireEntity(i); 
-            }, config.dataPeriod); */
             fireEntity(i); 
         }
         

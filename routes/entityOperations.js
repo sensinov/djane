@@ -17,11 +17,7 @@
  ******************************************************************************/
 
 const express = require ('express');
-const subscription=require('../notify/subscription'); //not yet handled 
-const config =require('../config/config');
-
-//var entityValidator = require('../models/entityModel'); To use later to handle entities representations validation. Don't forget to handle the existance
-
+const subscription=require('../notify/subscription'); 
 const mongo = require('../lib/mongo'); 
 const db=mongo.getdb(); 
 

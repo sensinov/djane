@@ -17,7 +17,6 @@
  ******************************************************************************/
 
 const express = require ('express');
-const config =require('../config/config');
 var subscriptionValidator = require('../models/subscriptionModel'); 
 
 const mongo = require('../lib/mongo'); 
@@ -63,7 +62,6 @@ function cssubscriptionExistsInDB (id, req, res) {
 }
 router.post('/csourceSubscriptions', function (req, res) {
     if (!JSON.parse(JSON.stringify(req.body))) {
-        console.log('*****'); 
         res.status(400); 
         res.send('Invalid Request - Not a valid json'); 
     } 
