@@ -92,7 +92,7 @@ function bootstrap (){
 
 		
 		const serer=app.listen(config.serverPort, function () {
-			console.log('listening on' + config.serverPort);
+			console.log('Listening on port: ' + config.serverPort);
 		});
 	}); 
 }
