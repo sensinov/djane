@@ -17,7 +17,6 @@
  ******************************************************************************/
 
 const express = require ('express');
-const config =require('../config/config');
 var csRegistrationValidator = require('../models/csourceregistrationModel'); 
 const mongo = require('../lib/mongo'); 
 const db=mongo.getdb(); 
@@ -63,7 +62,6 @@ function  csRegistrationExistsInDB (id, req, res) {
 
 router.post('/csourceRegistrations', function (req, res) {
     if (!JSON.parse(JSON.stringify(req.body))) {
-        console.log('*****'); 
         res.status(400); 
         res.send('Invalid Request - Not a valid json'); 
     } 

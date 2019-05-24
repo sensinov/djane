@@ -23,11 +23,8 @@ const createError = require('http-errors');
 const config = require ('./config/config');
 const mongo = require ('./lib/mongo'); 
 
-//make the public folder accessible to the public
-//app.use(express.static('public'));
 
 //to send data in json format
-//app.use(bodyParser.json( {type : ['json', 'ld+json']}));
 app.use(bodyParser.json( {type : ['application/json', 'application/ld+json']}));
 
 //The urlencoded method within body-parser tells body-parser to extract data from the <form> element and add them to the body property in the request object.
@@ -102,8 +99,8 @@ function bootstrap (){
 
 bootstrap(); 
 
-process.on('SIGTERM', () => {
-	server.close(() => {
+process.on('SIGTERM', function () {
+	server.close( function () {
 		console.log('Server terminated'); 
 		process.exit(0); 
 	})

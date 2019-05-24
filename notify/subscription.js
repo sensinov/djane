@@ -116,17 +116,11 @@ function getNotificationsUris (subList, body) {
 
 
 /* This function returns a tab of subscription Ids */
-/*
-    Mongodb request example:
-    db.getCollection('subscriptions').find({ $and: [ {'entities.type':'Vehicle'},  { 'watchedAttributes': { $in: ['speed', 'closeTo'] } } ] })
- */
-//This function will be renamed "Notify"
 function notify (body) {
     let subsIds=[];
     //Variable defined to save the result of getting subscriptions list corresponding to created entities resources
     let subList=null;
     let subAttrs=getSubscriptionAttributes(body);
-    //let query = `{$and : [{"entities.type": "${subAttrs[0]}"}, {"watchedAttributes": {$in : [`;
     let query='{"$and" : [{"entities.type": "'+ subAttrs[0] + '"}, {"watchedAttributes": {"$in" : [';
     for (let i=1; i < subAttrs.length; i++ ){
         query = query+ '"'+ subAttrs[i]+'"';
@@ -142,7 +136,6 @@ function notify (body) {
         if (err) {
             return console.log(err);
         } else {
-            //return result
             sublist=result;
             getNotificationsUris(sublist, body);
         }

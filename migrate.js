@@ -15,8 +15,6 @@
  * Authors: 
  * 		Ghada Gharbi < ghada.gharbi@sensinov.com >
  ******************************************************************************/
-
-const config = require ('./config/config');
 const mongo = require ('./lib/mongo'); 
 
 const {

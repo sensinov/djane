@@ -15,15 +15,8 @@
  * Authors: 
  * 		Ghada Gharbi < ghada.gharbi@sensinov.com >
  ******************************************************************************/
-
-const ip = require('ip');
-const IP = ip.address('lo', 'ipv4'); //localhost adress 
 const serverPort = 3000;
-const monitorPort = 4000;
-
-const serverHostHTTP = 'http://' + IP + ':' + serverPort + '/';
-const monitorContext = 'http://' + IP + ':' + monitorPort + '/';
-
+const serverHostHTTP = 'http://127.0.0.1:' + serverPort + '/';
 
 //MongoDB config
 const dbServer ='mongodb://';
@@ -34,14 +27,9 @@ const DataBaseName = 'ngsi_ld_bd';
 // should be mongodb://localhost:27017/ngsi_ld_bd
 const mongoDBHost = dbServer + dbHost + ':' + dbPort + '/'+ DataBaseName;
 
-
-
-
 module.exports = {
     serverPort,
-    monitorPort,
     serverHostHTTP,
-    monitorContext,
     mongoDBHost,
     DataBaseName
 }
