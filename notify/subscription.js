@@ -22,7 +22,6 @@ const db=mongo.getdb();
 let request = require('request');
 
 function sendNotifications(notifsInfos,body) {
-    /*let notifications=[]; */
     for (let i=0; i<notifsInfos.length; i ++){
         notifsInfos[i].body=buildNotification(notifsInfos[i], body);
     }
