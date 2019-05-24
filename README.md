@@ -22,7 +22,7 @@ npm run migrate
 ## NGSIL-LD server 
 To start server, run: 
 ```bash
-npm run start
+npm start
 ```
 A server will start locally listenning on port 3000. The port number is configured in config file (/config/config.js). 
 
