@@ -11,7 +11,7 @@ sudo apt-get install npm
 
 * install mongodb (https://docs.mongodb.com/manual/installation/)
 
-* play the migrations
+## play the migrations
 At this step, you will create indexes on collections before starting the server.
 Before you run the following command, you have to start mongo service and create a database. 
 As described in config file (/config/config.js), we start locally a mongo service and we create 'ngsi_ld_bd' database.  
