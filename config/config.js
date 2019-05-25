@@ -16,7 +16,6 @@
  * 		Ghada Gharbi < ghada.gharbi@sensinov.com >
  ******************************************************************************/
 const serverPort = 3000;
-const serverHostHTTP = 'http://127.0.0.1:' + serverPort + '/';
 
 //MongoDB config
 const dbServer ='mongodb://';
@@ -29,7 +28,6 @@ const mongoDBHost = dbServer + dbHost + ':' + dbPort + '/'+ DataBaseName;
 
 module.exports = {
     serverPort,
-    serverHostHTTP,
     mongoDBHost,
     DataBaseName
 }
