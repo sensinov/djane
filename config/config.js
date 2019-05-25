@@ -15,16 +15,16 @@
  * Authors: 
  * 		Ghada Gharbi < ghada.gharbi@sensinov.com >
  ******************************************************************************/
-const serverPort = 3000;
+const serverPort = int(process.env.SERVER_PORT) || 3000;
 
 //MongoDB config
-const dbServer ='mongodb://';
-const dbHost = '127.0.0.1';
-const dbPort =  '27017';
-const DataBaseName = 'ngsi_ld_bd';
+const dbServer = process.env.DB_SERVER || 'mongodb://';
+const dbHost = process.env.DB_HOST || '127.0.0.1';
+const dbPort = process.env.DB_PORT || '27017';
+const DataBaseName = process.env.DATABASE_NAME || 'ngsi_ld_bd';
 
 // should be mongodb://localhost:27017/ngsi_ld_bd
-const mongoDBHost = dbServer + dbHost + ':' + dbPort + '/'+ DataBaseName;
+const mongoDBHost = dbServer + dbHost + ':' + dbPort + '/' + DataBaseName;
 
 module.exports = {
     serverPort,
@@ -32,3 +32,7 @@ module.exports = {
     DataBaseName
 }
 
+function int(str) {
+    if (!str) return 0;
+    return parseInt(str, 10);
+}
