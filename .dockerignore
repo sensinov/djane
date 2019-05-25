@@ -1,0 +1,3 @@
+# Ignore the things that should not leave developer machine
+node_modules
+data
