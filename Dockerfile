@@ -1,7 +1,5 @@
 FROM node:slim
 
-LABEL maintainer="thomas.gilbert@alexandra.dk"
-
 WORKDIR /usr/src/app
 
 COPY package*.json ./

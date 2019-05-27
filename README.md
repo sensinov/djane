@@ -54,7 +54,7 @@ docker run -d -v $PWD/data:/data/db --name mongodb --network djanenet mongo
 ```
 Notice the port is not mounted and that data will be stored on your local machine in a data folder. According to the official documentation [here](https://hub.docker.com/_/mongo) running host mounted volumes on Windows and OSX is not officially supported, so if you run into problems follow the documentation.
 ```bash
-docker run --rm -it --network djanenet insert_name_here/djane:1.0.0 node migrate
+docker run --rm -it --network djanenet -e DB_HOST=mongodb insert_name_here/djane:1.0.0 node migrate
 ```
 This step should run the migrate command against your mongodb.
 ```bash

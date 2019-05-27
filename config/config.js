@@ -15,7 +15,7 @@
  * Authors: 
  * 		Ghada Gharbi < ghada.gharbi@sensinov.com >
  ******************************************************************************/
-const serverPort = int(process.env.SERVER_PORT) || 3000;
+const serverPort = +process.env.SERVER_PORT || 3000;
 
 //MongoDB config
 const dbServer = process.env.DB_SERVER || 'mongodb://';
@@ -30,9 +30,4 @@ module.exports = {
     serverPort,
     mongoDBHost,
     DataBaseName
-}
-
-function int(str) {
-    if (!str) return 0;
-    return parseInt(str, 10);
 }
