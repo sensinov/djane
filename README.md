@@ -65,3 +65,22 @@ Notice here that we are setting the environment variable DB_HOST to mongodb. Thi
 docker run -d --network host -p 3000:3000 insert_name_here/djane:1.0.0
 ```
 The final example above is in the case that you are running your mongodb natively on your localhost machine.
+
+## Start with docker-compose
+
+### Install prerequisites
+* Docker Compose (https://docs.docker.com/compose/install/) 
+
+### Running the services 
+A YAML file, namely 'docker-compose.yml', is defined to configure the application’s services.
+This defines two dockers:
+* server which represents the NGSI-LD server.
+* mongo which represents the persistence layer. 
+
+By default, server service can reach mongo service by using the service’s name. That is why we configured the database URI to mongodb://mongo:27017 (DB_SERVER ENV variable in Dockerfile) 
+
+To run the two dockers using the compose file execute the command:
+
+```bash 
+docker-compose up
+```
