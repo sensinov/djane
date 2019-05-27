@@ -26,6 +26,7 @@ const DataBaseName = process.env.DATABASE_NAME || 'ngsi_ld_bd';
 // should be mongodb://localhost:27017/ngsi_ld_bd
 const mongoDBHost = dbServer + dbHost + ':' + dbPort + '/' + DataBaseName;
 
+
 module.exports = {
     serverPort,
     mongoDBHost,

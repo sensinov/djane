@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo:4.0.9-xenial
+    restart: always
+    volumes:
+      - ./data/db:/data/db
+    ports: 
+      - "27017:27017"
+    networks:
+      - djanenetwork
+
+  server: 
+    build: .
+    volumes: 
+      - ./server:/data
+    depends_on: 
+      - mongo
+    ports: 
+      - "3000:3000"
+    networks: 
+      - djanenetwork
+
+
+networks:
+  djanenetwork: 
+
+
+
+
