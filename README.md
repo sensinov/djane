@@ -81,5 +81,5 @@ This defines two dockers containers:
 To launch the services execute the command below:
 
 ```bash 
-docker-compose -f up
+docker-compose up
 ```
