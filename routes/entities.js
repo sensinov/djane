@@ -33,27 +33,30 @@ const router = express.Router();
 
 */
 router.get('/entities', function(req, res) {
-    let filter = null;
+    let filters = null; 
     if (JSON.stringify(req.query).length > 2) {
         var queryOptions = req.query;
         var keys = Object.keys(queryOptions);
-        filter = '{"$and" : [';
+        filters = {}; 
+        let filter = []; 
+        filters["$and"]=filter; 
+        let queryTerm = null; 
+        let keyValue = null; 
         for (var i = 0; i < keys.length; i++) {
-            console.log(parseInt(queryOptions[keys[i]]));
             if (!isNaN(parseInt(queryOptions[keys[i]]))) {
-                filter = filter + '{"' + keys[i] + '": ' + queryOptions[keys[i]] + '} ';
+               keyValue=parseInt(queryOptions[keys[i]]);
             } else {
-                filter = filter + '{"' + keys[i] + '": "' + queryOptions[keys[i]] + '"} ';
+                keyValue=queryOptions[keys[i]];
             }
-            if (i < keys.length - 1) {
-                filter = filter + ',';
+            queryTerm = {
+                [keys[i]]  : keyValue
             }
+            filters["$and"].push(queryTerm); 
         }
-        filter = filter + ']}';
-        console.log("filter" + filter);
+        console.log('filters', JSON.stringify(filters)); 
     } 
-    if (filter !== null) {
-        db.collection('entities').find(JSON.parse(filter)).project({_id: 0}).toArray(function (err, result) {
+    if (filters !== null) {
+        db.collection('entities').find(filters).project({_id: 0}).toArray(function (err, result) {
             if (err) {
                 return console.log(err);
             } else {
@@ -107,12 +110,6 @@ function entityExistsInDB (id, res, req) {
 }
 
 router.post('/entities', function (req, res) {
-    console.log('post'); 
-    console.log('body', req.body); 
-    if (!JSON.parse(JSON.stringify(req.body))) {
-        res.status(400); 
-        res.send('Invalid Request - Not a valid json'); 
-    } 
     let verdict = entityValidator.entityValidator(req.body); 
     if (!verdict.correct) {
         res.status(404); 
@@ -121,6 +118,8 @@ router.post('/entities', function (req, res) {
         id=req.body.id;       
         entityExistsInDB (id, res, req); 
     }
+   
+    
     
 });
 
