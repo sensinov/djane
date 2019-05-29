@@ -24,6 +24,7 @@ const dbPort = process.env.DB_PORT || '27017';
 const DataBaseName = process.env.DATABASE_NAME || 'ngsi_ld_bd';
 const mongoDBHost = dbServer + dbHost + ':' + dbPort + '/' + DataBaseName;
 
+
 module.exports = {
     serverPort,
     mongoDBHost,

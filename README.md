@@ -67,19 +67,18 @@ docker run -d --network host -p 3000:3000 insert_name_here/djane:1.0.0
 The final example above is in the case that you are running your mongodb natively on your localhost machine.
 
 ## Start with docker-compose
+
 Using docker-compose is not recommended for a production environment, and the services launched are only for testing and evaluation purposes.
 
 ### Install prerequisites
 * Docker Compose (https://docs.docker.com/compose/install/) 
 
 ### Running the services 
-A YAML file, namely 'docker-compose.yml', is defined to configure the application’s services.
-This defines two dockers containers:
+A YAML file, namely 'docker-compose.yml', is defined to configure the application’s services. This defines two dockers containers:
 * djaneio which represents the NGSI-LD service.
 * mongo which represents the persistence layer. 
 
 To launch the services execute the command below:
-
 ```bash 
 docker-compose up
 ```
