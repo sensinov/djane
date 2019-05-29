@@ -11,7 +11,7 @@
     "Thomas Gilbert <thomas.gilbert@alexandra.dk> (https://alexandra.dk/dk/om_os/medarbejdere/thomas-gilbert/)"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "test": "jest",
     "migrate": "node migrate.js",
     "start": "node server.js"
   },
