@@ -6,6 +6,9 @@ COPY package*.json ./
 RUN npm install --production
 COPY . .
 
+# Download a wait program, used with docker-compose
+RUN curl -sO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && chmod +x ./wait-for-it.sh
+
 # The SERVER_PORT is the port exposed by the service
 ENV SERVER_PORT=3000
 

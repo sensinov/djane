@@ -66,10 +66,6 @@ function subscriptionExistsInDB (id, req, res) {
 }
 
 router.post('/subscriptions', function (req, res) {
-    if (!JSON.parse(JSON.stringify(req.body))) {
-        res.status(400); 
-        res.send('Invalid Request - Not a valid json'); 
-    } 
     let verdict = subscriptionValidator.subscriptionValidator(req.body); 
     if (!verdict.correct) {
         res.status(404); 

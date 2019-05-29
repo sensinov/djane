@@ -6,26 +6,25 @@ services:
     restart: always
     volumes:
       - ./data/db:/data/db
-    ports: 
-      - "27017:27017"
+    # Uncomment the lines below to enable introspection into the mongodb
+    # with external tools.
+    # ports: 
+    #   - "27017:27017"
     networks:
       - djanenetwork
 
-  server: 
+  djaneio: 
     build: .
-    volumes: 
-      - ./server:/data
     depends_on: 
       - mongo
+    environment:
+      DB_HOST: mongo
     ports: 
       - "3000:3000"
+    command: bash -c "./wait-for-it.sh mongo:27017 -t 30 -- npm run migrate && npm start"
     networks: 
       - djanenetwork
 
-
 networks:
   djanenetwork: 
-
-
-
 

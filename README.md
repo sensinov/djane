@@ -68,19 +68,17 @@ The final example above is in the case that you are running your mongodb nativel
 
 ## Start with docker-compose
 
+Using docker-compose is not recommended for a production environment, and the services launched are only for testing and evaluation purposes.
+
 ### Install prerequisites
 * Docker Compose (https://docs.docker.com/compose/install/) 
 
 ### Running the services 
-A YAML file, namely 'docker-compose.yml', is defined to configure the application’s services.
-This defines two dockers:
-* server which represents the NGSI-LD server.
+A YAML file, namely 'docker-compose.yml', is defined to configure the application’s services. This defines two dockers containers:
+* djaneio which represents the NGSI-LD service.
 * mongo which represents the persistence layer. 
 
-By default, server service can reach mongo service by using the service’s name. That is why we configured the database URI to mongodb://mongo:27017 (DB_SERVER ENV variable in Dockerfile) 
-
-To run the two dockers using the compose file execute the command:
-
+To launch the services execute the command below:
 ```bash 
 docker-compose up
 ```

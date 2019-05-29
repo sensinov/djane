@@ -24,8 +24,27 @@ const config = require ('./config/config');
 const mongo = require ('./lib/mongo'); 
 
 
-//to send data in json format
+//bodyParser middleware to parse the request body and place the result in request.body of a route.
 app.use(bodyParser.json( {type : ['application/json', 'application/ld+json']}));
+app.use(function (err, req, res, next) {
+	let msg = {}; 
+	try {
+	  	if (err instanceof Error) {
+			if (err.statusCode ) {
+				msg = {
+					"title" : "Bad Request - Invalid body",
+					"type" : err.type, 
+					"detail" : err.body
+				}
+		 	 	return res.status(err.statusCode ).send(msg)
+			}
+		} 
+		throw err;    
+	} catch (e) {
+	  const finalError = new InternalServerError(err)
+	  return res.status(finalError.statusCode).json()
+	}
+}); 
 
 //The urlencoded method within body-parser tells body-parser to extract data from the <form> element and add them to the body property in the request object.
 app.use(bodyParser.urlencoded({extended: true}));
