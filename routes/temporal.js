@@ -24,42 +24,42 @@ const db=mongo.getdb();
 
 const router = express.Router();
 
-router.get('/temporal/entities', function (req, res){
+router.get('/ngsi-ld/v1/temporal/entities', function (req, res){
     res.status(422); 
     res.send('Operation Not Supported');  
 }); 
 
-router.post('/temporal/entities', function (req, res) {
+router.post('/ngsi-ld/v1/temporal/entities', function (req, res) {
     res.status(422); 
     res.send('Operation Not Supported'); 
 }); 
 
-router.get('/temporal/entities/:entityid', function (req, res) {
+router.get('/ngsi-ld/v1/temporal/entities/:entityid', function (req, res) {
     res.status(422); 
     res.send('Operation Not Supported'); 
 });
 
-router.delete('/temporal/entities/:entityId', function (req, res) {
+router.delete('/ngsi-ld/v1/temporal/entities/:entityId', function (req, res) {
     res.status(422); 
     res.send('Operation Not Supported'); 
 }); 
 
-router.post('/temporal/entities/:entityId/attrs', function (req, res) {
+router.post('/ngsi-ld/v1/temporal/entities/:entityId/attrs', function (req, res) {
     res.status(422); 
     res.send('Operation Not Supported'); 
 }); 
 
-router.delete('/temporal/entities/:entityId/attrs/:attrId', function (req, res){
+router.delete('/ngsi-ld/v1/temporal/entities/:entityId/attrs/:attrId', function (req, res){
     res.status(422); 
     res.send('Operation Not Supported'); 
 }); 
 
-router.patch('/temporal/entities/:entityId/attrs/:attrId/:instanceId', function (req, res){
+router.patch('/ngsi-ld/v1/temporal/entities/:entityId/attrs/:attrId/:instanceId', function (req, res){
     res.status(422); 
     res.send('Operation Not Supported'); 
 }); 
 
-router.delete('/temporal/entities/:entityId/attrs/:attrId/:instanceId', function (req, res){
+router.delete('/ngsi-ld/v1/temporal/entities/:entityId/attrs/:attrId/:instanceId', function (req, res){
     res.status(422); 
     res.send('Operation Not Supported'); 
 }); 

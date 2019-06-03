@@ -26,7 +26,7 @@ const router = express.Router();
 
 //entityOperations management
 //POST /entityOperations/create
-router.post('/entityOperations/create', function(req, res) {
+router.post('/ngsi-ld/v1/entityOperations/create', function(req, res) {
 	db.collection('entities').insertMany(req.body, function (err, result) {
     		if (err) return console.log(err)
 		res.status(201)
@@ -41,7 +41,7 @@ router.post('/entityOperations/create', function(req, res) {
 //			if option query (flag) = "replace" then all the existing entity content shall be replaced
 //			else if option query (flag) ="update" then existing entity content shall be updated
 
-router.post('/entityOperations/upsert', function(req, res) {
+router.post('/ngsi-ld/v1/entityOperations/upsert', function(req, res) {
 	var flagValue = req.query.flag
 	var Data = req.body 
 	var entities_id = '[' 
@@ -89,7 +89,7 @@ function process_entity (entity, flagValue) {
 }
 
 //POST /entityOperations/update
-router.post('/entityOperations/update', function(req, res) {
+router.post('/ngsi-ld/v1/entityOperations/update', function(req, res) {
 	var flagValue = req.query.flag;
 	var Data = req.body ;
 	var entities_id = '[' ;
@@ -106,7 +106,7 @@ router.post('/entityOperations/update', function(req, res) {
 });
 
 //POST /entityOperations/delete
-router.post('/entityOperations/delete', function(req, res) {
+router.post('/ngsi-ld/v1/entityOperations/delete', function(req, res) {
 	var Data = req.body ;
 	var entities_id = '[' ;
 	for (var j=0; j < Data.length; j ++ ) {

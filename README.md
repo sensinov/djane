@@ -29,7 +29,7 @@ A server will start locally listenning on port 3000. The port number is configur
 ## First call
 To test that you have correctly installed the server, you can run your first query
 ```bash
-curl "http://localhost:3000/subscriptions" -H 'Accept: application/ld+json'
+curl "http://localhost:3000//ngsi-ld/v1/subscriptions" -H 'Accept: application/ld+json'
 ```
 This will return an empty set, since nothing has been created yet. Note that you must specify the accept header, otherwise you get an error. Look [here](https://forge.etsi.org/swagger/ui/?url=https://forge.etsi.org/gitlab/NGSI-LD/NGSI-LD/raw/master/spec/updated/full_api.json#/) for more information about the API.
 
