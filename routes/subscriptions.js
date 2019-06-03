@@ -18,6 +18,7 @@
 
 const express = require ('express');
 var subscriptionValidator = require('../models/subscriptionModel'); 
+var configPath = require ('../config/config'); 
 const mongo = require('../lib/mongo'); 
 const db=mongo.getdb(); 
 
@@ -25,7 +26,7 @@ const db=mongo.getdb();
 const router = express.Router();
 
 //Subscriptions management 
-router.get('/ngsi-ld/v1/subscriptions', function(req, res) {
+router.get(configPath.basePath+'/subscriptions', function(req, res) {
 	db.collection('subscriptions').find().project({_id:0}).toArray(function (err, result){ 
 		if (err) {
 			return console.log(err);
@@ -36,7 +37,7 @@ router.get('/ngsi-ld/v1/subscriptions', function(req, res) {
   	})
 });
 
-router.get('/ngsi-ld/v1/subscriptions/:subscriptionId',function(req, res) {
+router.get(configPath.basePath+'/subscriptions/:subscriptionId',function(req, res) {
 	db.collection('subscriptions').find({'id': req.params.subscriptionId}).project({_id:0}).toArray(function (err, result){ 
 		if (err) {
 			return console.log(err);
@@ -65,7 +66,7 @@ function subscriptionExistsInDB (id, req, res) {
     }); 
 }
 
-router.post('/ngsi-ld/v1/subscriptions', function (req, res) {
+router.post(configPath.basePath+'/subscriptions', function (req, res) {
     let verdict = subscriptionValidator.subscriptionValidator(req.body); 
     if (!verdict.correct) {
         res.status(404); 
@@ -78,7 +79,7 @@ router.post('/ngsi-ld/v1/subscriptions', function (req, res) {
 
 //PATCH /subscriptions/{subscriptionId}
 //Subscription fragment including id, type and any another subscription filed to be changed 
-router.patch('/ngsi-ld/v1/subscriptions/:subscriptionId/attrs', function (req, res) {
+router.patch(configPath.basePath+'/subscriptions/:subscriptionId/attrs', function (req, res) {
     var updateObject = req.body; 
     db.collection('subscriptions').updateOne({'id' : req.params.entityId}, {$set: updateObject}, function (err, result) {
 	if (err) return console.log(err)
@@ -87,7 +88,7 @@ router.patch('/ngsi-ld/v1/subscriptions/:subscriptionId/attrs', function (req, r
     })
 });
 
-router.delete('/ngsi-ld/v1/subscriptions/:subscriptionId', function (req, res) {
+router.delete(configPath.basePath+'/subscriptions/:subscriptionId', function (req, res) {
   	 db.collection('subscriptions').findOneAndDelete({'id': req.params.subscriptionId}, (err, result) => {
     		if (err) return res.send(500, err)
 		res.status(204)

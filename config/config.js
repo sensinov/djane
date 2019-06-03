@@ -23,10 +23,13 @@ const dbHost = process.env.DB_HOST || '127.0.0.1';
 const dbPort = process.env.DB_PORT || '27017';
 const DataBaseName = process.env.DATABASE_NAME || 'ngsi_ld_bd';
 const mongoDBHost = dbServer + dbHost + ':' + dbPort + '/' + DataBaseName;
-
+const apiName = '/ngsi-ld'; 
+const apiversion = 'v1'; 
+const basePath = apiName + '/' + apiversion; 
 
 module.exports = {
     serverPort,
     mongoDBHost,
-    DataBaseName
+    DataBaseName, 
+    basePath
 }

@@ -19,6 +19,7 @@
 const express = require ('express');
 const subscription=require('../notify/subscription');
 var entityValidator = require('../models/entityModel'); 
+var configPath = require ('../config/config'); 
 const mongo = require('../lib/mongo'); 
 const db=mongo.getdb(); 
 
@@ -32,7 +33,7 @@ const router = express.Router();
             The corresponding mongo request template is: db.entities.find({ $and: [{"type": "Vehicle"}, {"speed.value": 130} ]}) 
 
 */
-router.get('/ngsi-ld/v1/entities', function(req, res) {
+router.get(configPath.basePath+'/entities', function(req, res) {
     let filters = null; 
     if (JSON.stringify(req.query).length > 2) {
         var queryOptions = req.query;
@@ -78,7 +79,7 @@ router.get('/ngsi-ld/v1/entities', function(req, res) {
     
 });
 
-router.get('/ngsi-ld/v1/entities/:entityId',function(req, res) {
+router.get(configPath.basePath+'/entities/:entityId',function(req, res) {
     db.collection('entities').find({'id': req.params.entityId}).project({_id: 0}).toArray(function (err, result) {
         if (err) {
             return console.log(err);
@@ -109,7 +110,7 @@ function entityExistsInDB (id, res, req) {
     }); 
 }
 
-router.post('/ngsi-ld/v1/entities', function (req, res) {
+router.post(configPath.basePath+'/entities', function (req, res) {
     let verdict = entityValidator.entityValidator(req.body); 
     if (!verdict.correct) {
         res.status(404); 
@@ -124,7 +125,7 @@ router.post('/ngsi-ld/v1/entities', function (req, res) {
 });
 
 //POST /entities/{entityId}/attrs/
-router.post('/ngsi-ld/v1/entities/:entityId/attrs/', function (req, res) {
+router.post(configPath.basePath+'/entities/:entityId/attrs/', function (req, res) {
     var updateObject = req.body;
     db.collection('entities').updateOne({'id' : req.params.entityId}, {$set: updateObject}, function (err, result) {
         if (err) {
@@ -137,7 +138,7 @@ router.post('/ngsi-ld/v1/entities/:entityId/attrs/', function (req, res) {
 });
 
 //PATCH /entities/{entityId}/attrs/
-router.patch('/ngsi-ld/v1/entities/:entityId/attrs', function (req, res) {
+router.patch(configPath.basePath+'/entities/:entityId/attrs', function (req, res) {
     var updateObject = req.body;
     db.collection('entities').updateOne({'id' : req.params.entityId}, {$set: updateObject}, function (err, result) {
         if (err) {
@@ -151,7 +152,7 @@ router.patch('/ngsi-ld/v1/entities/:entityId/attrs', function (req, res) {
 
 //PATCH /entities/{entityId}/attrs/{attrId}
 //The body should contain entity fragment containing the elements of the attribute to be updated
-router.patch('/ngsi-ld/v1/entities/:entityId/attrs/:attrId', function (req, res) {
+router.patch(configPath.basePath+'/entities/:entityId/attrs/:attrId', function (req, res) {
     var updateObject = req.body;
     var attributeId = req.params.attrId;
     db.collection('entities').updateOne({'id' : req.params.entityId}, {$set: updateObject}, function (err, result) {
@@ -166,7 +167,7 @@ router.patch('/ngsi-ld/v1/entities/:entityId/attrs/:attrId', function (req, res)
 
 
 //DELETE /entities/{entityId}/attrs/{attrId}
-router.delete('/ngsi-ld/v1/entities/:entityId', function (req, res) {
+router.delete(configPath.basePath+'/entities/:entityId', function (req, res) {
     db.collection('entities').findOneAndDelete({'id': req.params.entityId}, (err, result) => {
         if (err) {
             return res.send(500, err)
