@@ -168,7 +168,7 @@ router.patch(configPath.basePath+'/entities/:entityId/attrs/:attrId', function (
 
 //DELETE /entities/{entityId}/attrs/{attrId}
 router.delete(configPath.basePath+'/entities/:entityId', function (req, res) {
-    db.collection('entities').findOneAndDelete({'id': req.params.entityId}, (err, result) => {
+    db.collection('entities').findOneAndDelete({'id': req.params.entityId}, function (err, result) {
         if (err) {
             return res.send(500, err)
         } else {
