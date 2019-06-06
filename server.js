@@ -23,6 +23,7 @@ const createError = require('http-errors');
 const config = require ('./config/config');
 const mongo = require ('./lib/mongo'); 
 
+const auth= require('./auth/auth'); 
 
 //bodyParser middleware to parse the request body and place the result in request.body of a route.
 app.use(bodyParser.json( {type : ['application/json', 'application/ld+json']}));
@@ -44,7 +45,7 @@ app.use(function (err, req, res, next) {
 	  const finalError = new InternalServerError(err)
 	  return res.status(finalError.statusCode).json()
 	}
-}); 
+});  
 
 //The urlencoded method within body-parser tells body-parser to extract data from the <form> element and add them to the body property in the request object.
 app.use(bodyParser.urlencoded({extended: true}));
@@ -83,14 +84,21 @@ app.get('/', function(req, res) {
 
 
 function bootstrap (){
-	mongo.bootstrap(function (err, result){
+	mongo.bootstrap(function (err, result) {
+
 		const entitiesRouter = require('./routes/entities');
 		const subscriptionRouter = require('./routes/subscriptions'); 
 		const csRegistrationRouter = require('./routes/csourceRegistrations');
 		const csSubscriptionRouter = require('./routes/csourceSubscriptions'); 
 		const entityOperationsRouter = require ('./routes/entityOperations'); 
-		const temporalRouter = require ('./routes/temporal')
+		const temporalRouter = require ('./routes/temporal'); 
+		const userRouter = require ('./routes/users'); 
 
+		app.post('/login', auth.authenticate);
+
+		// user Router 
+		app.use('/', userRouter); 
+		
 		// entities router
 		app.use('/', entitiesRouter);
 
@@ -109,7 +117,6 @@ function bootstrap (){
 		//entities temporal evolution Router
 		app.use('/', temporalRouter); 
 
-		
 		const serer=app.listen(config.serverPort, function () {
 			console.log('Listening on port: ' + config.serverPort);
 		});

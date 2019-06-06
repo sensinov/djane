@@ -23,44 +23,45 @@ var configPath = require ('../config/config');
 const mongo = require('../lib/mongo'); 
 const db=mongo.getdb(); 
 
+const auth = require ('../auth/auth'); 
 const router = express.Router();
 
-router.get(configPath.basePath+'/temporal/entities', function (req, res){
+router.get(configPath.basePath+'/temporal/entities', auth.checkToken, function (req, res){
     res.status(422); 
     res.send('Operation Not Supported');  
 }); 
 
-router.post(configPath.basePath+'/temporal/entities', function (req, res) {
+router.post(configPath.basePath+'/temporal/entities', auth.checkToken, function (req, res) {
     res.status(422); 
     res.send('Operation Not Supported'); 
 }); 
 
-router.get(configPath.basePath+'/temporal/entities/:entityid', function (req, res) {
+router.get(configPath.basePath+'/temporal/entities/:entityid', auth.checkToken, function (req, res) {
     res.status(422); 
     res.send('Operation Not Supported'); 
 });
 
-router.delete(configPath.basePath+'/temporal/entities/:entityId', function (req, res) {
+router.delete(configPath.basePath+'/temporal/entities/:entityId', auth.checkToken, function (req, res) {
     res.status(422); 
     res.send('Operation Not Supported'); 
 }); 
 
-router.post(configPath.basePath+'/temporal/entities/:entityId/attrs', function (req, res) {
+router.post(configPath.basePath+'/temporal/entities/:entityId/attrs', auth.checkToken, function (req, res) {
     res.status(422); 
     res.send('Operation Not Supported'); 
 }); 
 
-router.delete(configPath.basePath+'/temporal/entities/:entityId/attrs/:attrId', function (req, res){
+router.delete(configPath.basePath+'/temporal/entities/:entityId/attrs/:attrId', auth.checkToken, function (req, res){
     res.status(422); 
     res.send('Operation Not Supported'); 
 }); 
 
-router.patch(configPath.basePath+'/temporal/entities/:entityId/attrs/:attrId/:instanceId', function (req, res){
+router.patch(configPath.basePath+'/temporal/entities/:entityId/attrs/:attrId/:instanceId', auth.checkToken, function (req, res){
     res.status(422); 
     res.send('Operation Not Supported'); 
 }); 
 
-router.delete(configPath.basePath+'/temporal/entities/:entityId/attrs/:attrId/:instanceId', function (req, res){
+router.delete(configPath.basePath+'/temporal/entities/:entityId/attrs/:attrId/:instanceId', auth.checkToken, function (req, res){
     res.status(422); 
     res.send('Operation Not Supported'); 
 }); 

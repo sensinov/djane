@@ -22,12 +22,12 @@ var configPath = require ('../config/config');
 const mongo = require('../lib/mongo'); 
 const db=mongo.getdb(); 
 
-
+const auth = require('../auth/auth'); 
 const router = express.Router();
 
 
 //ContextSources management
-router.get(configPath.basePath+'/csourceRegistrations', function(req, res) {
+router.get(configPath.basePath+'/csourceRegistrations', auth.checkToken, function(req, res) {
 	db.collection('csourceRegistrations').find().project({_id:0}).toArray(function (err, result){ 
     		if (err) return console.log(err)
 		res.status(200)
@@ -35,7 +35,7 @@ router.get(configPath.basePath+'/csourceRegistrations', function(req, res) {
   	})
 });
 
-router.get(configPath.basePath+'/csourceRegistrations/:csourceRegistrationId',function(req, res) {
+router.get(configPath.basePath+'/csourceRegistrations/:csourceRegistrationId', auth.checkToken, function(req, res) {
 	db.collection('csourceRegistrations').find({'id': req.params.csourceRegistrationId}).project({_id:0}).toArray(function (err, result){ 
     		if (err) return console.log(err)
 		res.status(200)
@@ -61,7 +61,7 @@ function  csRegistrationExistsInDB (id, req, res) {
     }); 
 }
 
-router.post(configPath.basePath+'/csourceRegistrations', function (req, res) {
+router.post(configPath.basePath+'/csourceRegistrations', auth.checkToken, function (req, res) {
     let verdict = csRegistrationValidator.csourceRegistrationValidator(req.body); 
     if (!verdict.correct) {
         res.status(404); 
@@ -72,7 +72,7 @@ router.post(configPath.basePath+'/csourceRegistrations', function (req, res) {
     }
 }); 
 
-router.delete(configPath.basePath+'/csourceRegistrations/:csourceRegistrationId', function (req, res) {
+router.delete(configPath.basePath+'/csourceRegistrations/:csourceRegistrationId', auth.checkToken, function (req, res) {
   	 db.collection('csourceRegistrations').findOneAndDelete({'id': req.params.csourceRegistrationId}, (err, result) => {
     		if (err) return res.send(500, err)
 		res.status(204)
