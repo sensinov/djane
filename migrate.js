@@ -22,6 +22,7 @@ const {
     subscriptions,
     csourceRegistrations, 
     csourceSubscriptions,
+    users, 
   } = require('./config/dbconfig')
 
 const INDEXES_CONFIG = {
@@ -231,6 +232,14 @@ const INDEXES_CONFIG = {
       name: 'status',
     },
   ], 
+  [users]: [
+    {
+      key: {
+        username: 1,
+      },
+      name: 'username',
+    },
+  ],
 }; 
 
 const collectionNames = Object.keys(INDEXES_CONFIG); 
