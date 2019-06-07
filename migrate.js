@@ -16,6 +16,10 @@
  * 		Ghada Gharbi < ghada.gharbi@sensinov.com >
  ******************************************************************************/
 const mongo = require ('./lib/mongo'); 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const user = require ('./config/config'); 
+let db; 
 
 const {
     entities,
@@ -272,10 +276,27 @@ function createCollectionsIndex () {
   });
 }
 
+function createUser () {
+  user.password = bcrypt.hashSync(user.password, saltRounds);
+  const myuser = {
+    "username" : user.username, 
+    "password" : user.password
+  }; 
 
+  db=mongo.getdb(); 
+  db.collection('users').insertOne(myuser, {'forceServerObjectId':true},function (err, result) {
+    if (err) {
+        return console.log(err);
+    } else {
+        console.log('user successfully created!!')
+    }
+
+  }); 
+}
 
 function bootstrap (){
 	mongo.bootstrap(function (err, result){
+    createUser() ; 
     createCollectionsIndex();  
   });
 }

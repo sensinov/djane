@@ -26,10 +26,14 @@ const mongoDBHost = dbServer + dbHost + ':' + dbPort + '/' + DataBaseName;
 const apiName = '/ngsi-ld'; 
 const apiversion = 'v1'; 
 const basePath = apiName + '/' + apiversion; 
+const username = "admin"; 
+const password = "admin4djane"; 
 
 module.exports = {
     serverPort,
     mongoDBHost,
     DataBaseName, 
-    basePath
+    basePath, 
+    username, 
+    password
 }

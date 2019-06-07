@@ -11,7 +11,7 @@ Before starting the project, you have to install the node dependencies. To do so
 npm install 
 ```
 ## Play the migrations
-At this step, you will create indexes on collections before starting the server.
+At this step, you will create indexes on collections and default user before starting the server.
 Before you run the following command, you have to start mongo service and create a database. 
 As described in config file (/config/config.js), we start locally a mongo service and we create 'ngsi_ld_bd' database.  
 
@@ -26,14 +26,15 @@ npm start
 ```
 A server will start locally listenning on port 3000. The port number is configured in config file (/config/config.js). 
 
-## First call
-To control access to the server, we have set up an authentication mechanism based on jwt.
-To retrieve a JSON Web Token from username/password, valid for an hour by default, run the following query: 
+## Authentication
+Authentication mechanism based on jwt. The authentication endpoint is 'localhost:3000/login'. 
+To retrieve a JSON Web Token from a default user (admin/admin4djane), valid for an hour by default, run the following query: 
 ```bash 
 curl -d '{"username":"admin", "password":"admin4djane"}' -H 'Content-Type: application/json' -X POST "http://localhost:3000/login"
 ```
+The user credentials are configured in config file (/config/config.js). 
 
-
+## First call
 To test that you have correctly installed the server, you can run your first query
 ```bash
 curl -H 'Accept: application/ld+json' -H 'X-AUTH-TOKEN: insert_genereted_jwt' -X GET "http://localhost:3000/ngsi-ld/v1/entities"

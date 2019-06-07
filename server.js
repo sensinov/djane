@@ -97,25 +97,25 @@ function bootstrap (){
 		app.post('/login', auth.authenticate);
 
 		// user Router 
-		app.use('/', userRouter); 
+		app.use(config.basePath, userRouter); 
 		
 		// entities router
-		app.use('/', entitiesRouter);
+		app.use(config.basePath, entitiesRouter);
 
 		//subscription router 
-		app.use('/', subscriptionRouter); 
+		app.use(config.basePath, subscriptionRouter); 
 
 		/*csourceRegistration router */
-		app.use('/', csRegistrationRouter);
+		app.use(config.basePath, csRegistrationRouter);
 
 		// csourceSubscription router 
-		app.use('/', csSubscriptionRouter); 
+		app.use(config.basePath, csSubscriptionRouter); 
 
 		//entityOperations router 
-		app.use ('/', entityOperationsRouter); 
+		app.use (config.basePath, entityOperationsRouter); 
 
 		//entities temporal evolution Router
-		app.use('/', temporalRouter); 
+		app.use(config.basePath, temporalRouter); 
 
 		const serer=app.listen(config.serverPort, function () {
 			console.log('Listening on port: ' + config.serverPort);

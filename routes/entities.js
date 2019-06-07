@@ -19,7 +19,7 @@
 const express = require ('express');
 const subscription=require('../notify/subscription');
 var entityValidator = require('../models/entityModel'); 
-var configPath = require ('../config/config'); 
+
 const mongo = require('../lib/mongo'); 
 const db=mongo.getdb(); 
 
@@ -33,7 +33,7 @@ const auth= require('../auth/auth');
             The corresponding mongo request template is: db.entities.find({ $and: [{"type": "Vehicle"}, {"speed.value": 130} ]}) 
 
 */
-router.get(configPath.basePath+'/entities', auth.checkToken, function(req, res) {
+router.get('/entities', auth.checkToken, function(req, res) {
     let filters = null; 
     if (JSON.stringify(req.query).length > 2) {
         var queryOptions = req.query;
@@ -79,7 +79,7 @@ router.get(configPath.basePath+'/entities', auth.checkToken, function(req, res) 
     
 });
 
-router.get(configPath.basePath+'/entities/:entityId', auth.checkToken, function(req, res) {
+router.get('/entities/:entityId', auth.checkToken, function(req, res) {
     db.collection('entities').find({'id': req.params.entityId}).project({_id: 0}).toArray(function (err, result) {
         if (err) {
             return console.log(err);
@@ -110,7 +110,7 @@ function entityExistsInDB (id, res, req) {
     }); 
 }
 
-router.post(configPath.basePath+'/entities', auth.checkToken, function (req, res) {
+router.post('/entities', auth.checkToken, function (req, res) {
     let verdict = entityValidator.entityValidator(req.body); 
     if (!verdict.correct) {
         res.status(404); 
@@ -125,7 +125,7 @@ router.post(configPath.basePath+'/entities', auth.checkToken, function (req, res
 });
 
 //POST /entities/{entityId}/attrs/
-router.post(configPath.basePath+'/entities/:entityId/attrs/', function (req, res) {
+router.post('/entities/:entityId/attrs/', function (req, res) {
     var updateObject = req.body;
     db.collection('entities').updateOne({'id' : req.params.entityId}, {$set: updateObject}, function (err, result) {
         if (err) {
@@ -138,7 +138,7 @@ router.post(configPath.basePath+'/entities/:entityId/attrs/', function (req, res
 });
 
 //PATCH /entities/{entityId}/attrs/
-router.patch(configPath.basePath+'/entities/:entityId/attrs', auth.checkToken, function (req, res) {
+router.patch('/entities/:entityId/attrs', auth.checkToken, function (req, res) {
     var updateObject = req.body;
     db.collection('entities').updateOne({'id' : req.params.entityId}, {$set: updateObject}, function (err, result) {
         if (err) {
@@ -152,7 +152,7 @@ router.patch(configPath.basePath+'/entities/:entityId/attrs', auth.checkToken, f
 
 //PATCH /entities/{entityId}/attrs/{attrId}
 //The body should contain entity fragment containing the elements of the attribute to be updated
-router.patch(configPath.basePath+'/entities/:entityId/attrs/:attrId', auth.checkToken, function (req, res) {
+router.patch('/entities/:entityId/attrs/:attrId', auth.checkToken, function (req, res) {
     var updateObject = req.body;
     var attributeId = req.params.attrId;
     db.collection('entities').updateOne({'id' : req.params.entityId}, {$set: updateObject}, function (err, result) {
@@ -167,7 +167,7 @@ router.patch(configPath.basePath+'/entities/:entityId/attrs/:attrId', auth.check
 
 
 //DELETE /entities/{entityId}/attrs/{attrId}
-router.delete(configPath.basePath+'/entities/:entityId', auth.checkToken, function (req, res) {
+router.delete('/entities/:entityId', auth.checkToken, function (req, res) {
     db.collection('entities').findOneAndDelete({'id': req.params.entityId}, function (err, result) {
         if (err) {
             return res.send(500, err)

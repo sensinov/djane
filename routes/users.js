@@ -4,14 +4,14 @@ const router = express.Router();
 const mongo = require('../lib/mongo'); 
 const db=mongo.getdb(); 
 
+const auth= require('../auth/auth'); 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-var configPath = require ('../config/config'); 
 
 
 //Get All users 
-router.get(configPath.basePath+'/users', function(req, res){
+router.get('/users', auth.checkToken, function(req, res){
     db.collection('users').find().project({_id: 0}).toArray(function (err, result) {
         if (err) {
             return console.log(err);
@@ -24,7 +24,7 @@ router.get(configPath.basePath+'/users', function(req, res){
 }); 
 
 //get a particular user (by username)
-router.get(configPath.basePath+'/users/:username', function(req,res){
+router.get('/users/:username',  auth.checkToken, function(req,res){
     db.collection('users').find({'username': req.params.username}).project({_id: 0}).toArray(function (err, result) {
         if (err) {
             return console.log(err);
@@ -36,7 +36,7 @@ router.get(configPath.basePath+'/users/:username', function(req,res){
 }); 
 
 //create a new user 
-router.post(configPath.basePath+'/users', function(req,res){
+router.post('/users',  auth.checkToken, function(req,res){
     //encrypt password
     req.body.password = bcrypt.hashSync(req.body.password, saltRounds);
     db.collection('users').insertOne(req.body, {'forceServerObjectId':true},function (err, result) {
@@ -50,7 +50,7 @@ router.post(configPath.basePath+'/users', function(req,res){
 }); 
 
 //delete a user (by username)
-router.delete(configPath.basePath+'/users/:username', function(req, res){
+router.delete('/users/:username',  auth.checkToken, function(req, res){
     db.collection('users').findOneAndDelete({'username': req.params.username}, function (err, result) {
         if (err) {
             return res.send(500, err)

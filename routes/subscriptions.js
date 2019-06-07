@@ -18,7 +18,6 @@
 
 const express = require ('express');
 var subscriptionValidator = require('../models/subscriptionModel'); 
-var configPath = require ('../config/config'); 
 const mongo = require('../lib/mongo'); 
 const db=mongo.getdb(); 
 
@@ -27,7 +26,7 @@ const router = express.Router();
 const auth = require ('../auth/auth'); 
 
 //Subscriptions management 
-router.get(configPath.basePath+'/subscriptions', auth.checkToken, function(req, res) {
+router.get('/subscriptions', auth.checkToken, function(req, res) {
 	db.collection('subscriptions').find().project({_id:0}).toArray(function (err, result){ 
 		if (err) {
 			return console.log(err);
@@ -38,7 +37,7 @@ router.get(configPath.basePath+'/subscriptions', auth.checkToken, function(req, 
   	})
 });
 
-router.get(configPath.basePath+'/subscriptions/:subscriptionId',auth.checkToken, function(req, res) {
+router.get('/subscriptions/:subscriptionId',auth.checkToken, function(req, res) {
 	db.collection('subscriptions').find({'id': req.params.subscriptionId}).project({_id:0}).toArray(function (err, result){ 
 		if (err) {
 			return console.log(err);
@@ -67,7 +66,7 @@ function subscriptionExistsInDB (id, req, res) {
     }); 
 }
 
-router.post(configPath.basePath+'/subscriptions', auth.checkToken, function (req, res) {
+router.post('/subscriptions', auth.checkToken, function (req, res) {
     let verdict = subscriptionValidator.subscriptionValidator(req.body); 
     if (!verdict.correct) {
         res.status(404); 
@@ -80,7 +79,7 @@ router.post(configPath.basePath+'/subscriptions', auth.checkToken, function (req
 
 //PATCH /subscriptions/{subscriptionId}
 //Subscription fragment including id, type and any another subscription filed to be changed 
-router.patch(configPath.basePath+'/subscriptions/:subscriptionId/attrs', auth.checkToken, function (req, res) {
+router.patch('/subscriptions/:subscriptionId/attrs', auth.checkToken, function (req, res) {
     var updateObject = req.body; 
     db.collection('subscriptions').updateOne({'id' : req.params.entityId}, {$set: updateObject}, function (err, result) {
 	if (err) return console.log(err)
@@ -89,7 +88,7 @@ router.patch(configPath.basePath+'/subscriptions/:subscriptionId/attrs', auth.ch
     })
 });
 
-router.delete(configPath.basePath+'/subscriptions/:subscriptionId', auth.checkToken, function (req, res) {
+router.delete('/subscriptions/:subscriptionId', auth.checkToken, function (req, res) {
   	 db.collection('subscriptions').findOneAndDelete({'id': req.params.subscriptionId}, (err, result) => {
     		if (err) return res.send(500, err)
 		res.status(204)

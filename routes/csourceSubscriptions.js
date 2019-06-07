@@ -18,7 +18,7 @@
 
 const express = require ('express');
 var subscriptionValidator = require('../models/subscriptionModel'); 
-var configPath = require ('../config/config')
+
 const mongo = require('../lib/mongo'); 
 const db=mongo.getdb(); 
 
@@ -26,7 +26,7 @@ const auth= require('../auth/auth');
 const router = express.Router();
 
 //csourceSubscriptions management
-router.get(configPath.basePath+'/csourceSubscriptions', auth.checkToken, function(req, res) {
+router.get('/csourceSubscriptions', auth.checkToken, function(req, res) {
 	console.log('get /csourceSubscriptions');
 	db.collection('csourceSubscriptions').find().project({_id:0}).toArray(function (err, result){ 
     		if (err) return console.log(err)
@@ -35,7 +35,7 @@ router.get(configPath.basePath+'/csourceSubscriptions', auth.checkToken, functio
   	})
 });
 
-router.get(configPath.basePath+'/csourceSubscriptions/:csourceSubscriptionsId', auth.checkToken, function(req, res) {
+router.get('/csourceSubscriptions/:csourceSubscriptionsId', auth.checkToken, function(req, res) {
 	db.collection('csourceSubscriptions').find({'id': req.params.csourceSubscriptionsId}).project({_id:0}).toArray(function (err, result){ 
     		if (err) return console.log(err)
 		res.status(200)
@@ -60,7 +60,7 @@ function cssubscriptionExistsInDB (id, req, res) {
         }
     }); 
 }
-router.post(configPath.basePath+'/csourceSubscriptions', auth.checkToken, function (req, res) {
+router.post('/csourceSubscriptions', auth.checkToken, function (req, res) {
     let verdict = subscriptionValidator.subscriptionValidator(req.body); 
     if (!verdict.correct) {
         res.status(404); 
@@ -73,7 +73,7 @@ router.post(configPath.basePath+'/csourceSubscriptions', auth.checkToken, functi
 
 //PATCH  /csourceSubscriptions/{subscriptionId}
 //Subscription fragment including id, type and any another context source registration subscription filed to be changed 
-router.patch(configPath.basePath+'/csourceSubscriptions/:subscriptionId/attrs', auth.checkToken, function (req, res) {
+router.patch('/csourceSubscriptions/:subscriptionId/attrs', auth.checkToken, function (req, res) {
     var updateObject = req.body; 
     db.collection('csourceSubscriptions').updateOne({'id' : req.params.entityId}, {$set: updateObject}, function (err, result) {
 	if (err) return console.log(err)
@@ -82,7 +82,7 @@ router.patch(configPath.basePath+'/csourceSubscriptions/:subscriptionId/attrs', 
     })
 });
 
-router.delete(configPath.basePath+'/csourceSubscriptions/:csourceSubscriptionId', auth.checkToken, function (req, res) {
+router.delete('/csourceSubscriptions/:csourceSubscriptionId', auth.checkToken, function (req, res) {
   	 db.collection('csourceSubscriptions').findOneAndDelete({'id': req.params.csourceSubscriptionId}, (err, result) => {
     		if (err) return res.send(500, err)
 		res.status(204)

@@ -43,33 +43,33 @@ function checkToken (req, res, next) {
 };
 
 function authenticate (req, res, next) {
-    let username = req.body.username; 
-    db=mongo.getdb(); 
-    db.collection('users').findOne({'username':req.body.username}, function(err, user){
-        if (err) {
-            next(err);
-        } else {
-            if(bcrypt.compareSync(req.body.password, user.password)) {
-                let token = jwt.sign({username: username},
-                    config.secret,
-                    { expiresIn: '24h' // expires in 24 hours
-                    }
-                  );
-                  // return the JWT token for the future API calls
-                  res.json({
-                    success: true,
-                    message: 'Authentication successful!',
-                    token: token
-                  });
-                  next(); 
-            }else{
-                res.send(403).json({
-                    success: false,
-                    message: 'Incorrect username or password'
-                  });
-            }
-        }
-    });
+  let username = req.body.username; 
+  db=mongo.getdb(); 
+  db.collection('users').findOne({'username':req.body.username}, function(err, user){
+      if (err) {
+          next(err);
+      } else {
+          if(bcrypt.compareSync(req.body.password, user.password)) {
+              let token = jwt.sign({username: username},
+                  config.secret,
+                  { expiresIn: config.expires 
+                  }
+                );
+                // return the JWT token for the future API calls
+                res.json({
+                  success: true,
+                  message: 'Authentication successful!',
+                  token: token
+                });
+                next(); 
+          }else{
+              res.send(403).json({
+                  success: false,
+                  message: 'Incorrect username or password'
+                });
+          }
+      }
+  });
 }
 
 module.exports = {
