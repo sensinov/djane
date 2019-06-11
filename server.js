@@ -87,29 +87,29 @@ function bootstrap (){
 	mongo.bootstrap(function (err, result) {
 
 		const entitiesRouter = require('./routes/entities');
-		const subscriptionRouter = require('./routes/subscriptions'); 
-		const csRegistrationRouter = require('./routes/csourceRegistrations');
-		const csSubscriptionRouter = require('./routes/csourceSubscriptions'); 
+		const subscriptionsRouter = require('./routes/subscriptions'); 
+		const csRegistrationsRouter = require('./routes/csourceRegistrations');
+		const csSubscriptionsRouter = require('./routes/csourceSubscriptions'); 
 		const entityOperationsRouter = require ('./routes/entityOperations'); 
 		const temporalRouter = require ('./routes/temporal'); 
-		const userRouter = require ('./routes/users'); 
+		const usersRouter = require ('./routes/users'); 
 
 		app.post('/login', auth.authenticate);
 
 		// user Router 
-		app.use(config.basePath, userRouter); 
+		app.use(config.basePath, usersRouter); 
 		
 		// entities router
 		app.use(config.basePath, entitiesRouter);
 
 		//subscription router 
-		app.use(config.basePath, subscriptionRouter); 
+		app.use(config.basePath, subscriptionsRouter); 
 
 		/*csourceRegistration router */
-		app.use(config.basePath, csRegistrationRouter);
+		app.use(config.basePath, csRegistrationsRouter);
 
 		// csourceSubscription router 
-		app.use(config.basePath, csSubscriptionRouter); 
+		app.use(config.basePath, csSubscriptionsRouter); 
 
 		//entityOperations router 
 		app.use (config.basePath, entityOperationsRouter); 

@@ -27,7 +27,7 @@ npm start
 A server will start locally listenning on port 3000. The port number is configured in config file (/config/config.js). 
 
 ## Authentication
-Authentication mechanism based on jwt. The authentication endpoint is ''localhost:3000/login''. 
+Authentication mechanism based on jwt. The authentication endpoint is *localhost:3000/login*. 
 To retrieve a JSON Web Token from a default user (admin/admin4djane), valid for an hour by default, run the following query: 
 ```bash 
 curl -d '{"username":"admin", "password":"admin4djane"}' -H 'Content-Type: application/json' -X POST "http://localhost:3000/login"
