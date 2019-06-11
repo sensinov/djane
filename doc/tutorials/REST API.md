@@ -32,6 +32,7 @@ Property graph
 
 ### Create OffStrreet Parking entity
 TBA
+
 **HTTP Request**
 
 **HTTP Response**
@@ -39,6 +40,7 @@ TBA
 
 ### Create Vehicle entity 
 TBA
+
 **HTTP Request** 
 
 **HTTP Response**
@@ -46,6 +48,7 @@ TBA
 
 ### Create Camera entity
 TBA
+
 **HTTP Request**
 
 **HTTP Response**
