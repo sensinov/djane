@@ -52,9 +52,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 var checker = function (req, res, next) {
 	var headerAccept=req.header('Accept');
+	const headerRegExp=RegExp('.*/.*'); 
 	var headerContentType=req.header('Content-Type')
 	if (req.method == "GET") {
-		if ((headerAccept == 'application/ld+json') || (headerAccept == 'application/json')) {
+		if ((headerRegExp.test(headerAccept)) || (headerAccept === 'undefined')) {
 			next();
 		} else {
 			res.status(400);
