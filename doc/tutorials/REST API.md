@@ -2,7 +2,7 @@
 As use case, we consider a context information management system related to transport. The entity types used in the example are: Vehicle, offStreetParking, Person, and Camera. The figure below illustrates the entities instances and their related properties and relationshiphis.  
 
 <p align="center">
-<img src="./figures/example.png" />
+<img src="../figures/example.png" />
 Property graph
 </p>
 
