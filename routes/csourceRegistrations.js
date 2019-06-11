@@ -21,6 +21,7 @@ var csRegistrationValidator = require('../models/csourceregistrationModel');
 const mongo = require('../lib/mongo'); 
 const db=mongo.getdb(); 
 
+const config = require ('../config/config');
 const auth = require('../auth/auth'); 
 const router = express.Router();
 
@@ -36,7 +37,7 @@ router.get('/csourceRegistrations', auth.checkToken, function(req, res) {
 
 router.get('/csourceRegistrations/:csourceRegistrationId', auth.checkToken, function(req, res) {
 	db.collection('csourceRegistrations').find({'id': req.params.csourceRegistrationId}).project({_id:0}).toArray(function (err, result){ 
-    		if (err) return console.log(err)
+    	if (err) return console.log(err)
 		res.status(200)
 		res.send(result)
 	})
@@ -48,12 +49,13 @@ function  csRegistrationExistsInDB (id, req, res) {
             res.status(409); 
             res.send('Resource already exists'); 
         } else {
-            db.collection('csourceRegistrations').insertOne(req.body, function (err, result) {
+            db.collection('csourceRegistrations').insertOne(req.body, {'forceServerObjectId':true}, function (err, result) {
                 if (err) {
                     return console.log(err); 
                 } else {
                     res.status(201); 
-                    res.send({message: '201 Created'}); 
+                    res.set('Location', config.basePath+'/csourceRegistrations/'+id);
+                    res.send(result.ops[0]); 
                 }
             }); 
         }

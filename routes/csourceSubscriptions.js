@@ -22,6 +22,8 @@ var subscriptionValidator = require('../models/subscriptionModel');
 const mongo = require('../lib/mongo'); 
 const db=mongo.getdb(); 
 
+const config = require ('../config/config'); 
+
 const auth= require('../auth/auth'); 
 const router = express.Router();
 
@@ -49,12 +51,13 @@ function cssubscriptionExistsInDB (id, req, res) {
             res.status(409); 
             res.send('Resource already exists'); 
         } else {
-            db.collection('csourceSubscriptions').insertOne(req.body, function (err, result) {
+            db.collection('csourceSubscriptions').insertOne(req.body, {'forceServerObjectId':true}, function (err, result) {
                 if (err) {
                     return console.log(err); 
                 } else {
-                    res.status(201)
-                    res.send({message: '201 Created'})
+                    res.status(201); 
+                    res.set('Location', config.basePath+'/csourceSubscriptions/'+id);
+                    res.send(result.ops[0]); 
                 }
           });
         }

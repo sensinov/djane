@@ -25,6 +25,7 @@ const db=mongo.getdb();
 
 const router = express.Router();
 
+const config = require ('../config/config');
 const auth= require('../auth/auth'); 
 /*
     Get entities : 
@@ -101,6 +102,7 @@ function entityExistsInDB (id, res, req) {
                     return console.log(err);
                 } else {
                     res.status(201);
+                    res.set('Location', config.basePath+'/entities/'+id);
                     res.send(result.ops[0]);
                     subscription.notify(req.body);
                 }
