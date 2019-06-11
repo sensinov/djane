@@ -18,16 +18,16 @@
 
 const express = require ('express');
 const subscription=require('../notify/subscription'); 
-var configPath = require ('../config/config'); 
+
 const mongo = require('../lib/mongo'); 
 const db=mongo.getdb(); 
 
-
+const auth= require('../auth/auth'); 
 const router = express.Router();
 
 //entityOperations management
 //POST /entityOperations/create
-router.post(configPath.basePath+'/entityOperations/create', function(req, res) {
+router.post('/entityOperations/create', auth.checkToken, function(req, res) {
 	db.collection('entities').insertMany(req.body, function (err, result) {
     		if (err) return console.log(err)
 		res.status(201)
@@ -42,7 +42,7 @@ router.post(configPath.basePath+'/entityOperations/create', function(req, res) {
 //			if option query (flag) = "replace" then all the existing entity content shall be replaced
 //			else if option query (flag) ="update" then existing entity content shall be updated
 
-router.post(configPath.basePath+'/entityOperations/upsert', function(req, res) {
+router.post('/entityOperations/upsert', auth.checkToken, function(req, res) {
 	var flagValue = req.query.flag
 	var Data = req.body 
 	var entities_id = '[' 
@@ -90,7 +90,7 @@ function process_entity (entity, flagValue) {
 }
 
 //POST /entityOperations/update
-router.post(configPath.basePath+'/entityOperations/update', function(req, res) {
+router.post('/entityOperations/update', auth.checkToken, function(req, res) {
 	var flagValue = req.query.flag;
 	var Data = req.body ;
 	var entities_id = '[' ;
@@ -107,7 +107,7 @@ router.post(configPath.basePath+'/entityOperations/update', function(req, res) {
 });
 
 //POST /entityOperations/delete
-router.post(configPath.basePath+'/entityOperations/delete', function(req, res) {
+router.post('/entityOperations/delete', auth.checkToken, function(req, res) {
 	var Data = req.body ;
 	var entities_id = '[' ;
 	for (var j=0; j < Data.length; j ++ ) {

@@ -17,12 +17,14 @@
   },
   "author": "sensinov",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "http-errors": "^1.7.2",
     "isuri": "^2.0.3",
     "jest": "^24.8.0",
     "jsonschema": "^1.2.4",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.1.10",
     "request": "^2.88.0"
   },
