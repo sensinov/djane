@@ -38,11 +38,11 @@ router.get('/csourceSubscriptions', auth.checkToken, function(req, res) {
 });
 
 router.get('/csourceSubscriptions/:csourceSubscriptionsId', auth.checkToken, function(req, res) {
-	db.collection('csourceSubscriptions').find({'id': req.params.csourceSubscriptionsId}).project({_id:0}).toArray(function (err, result){ 
-    		if (err) return console.log(err)
-		res.status(200)
-		res.send(result)
-	})
+	db.collection('csourceSubscriptions').findOne({'id': req.params.csourceSubscriptionsId}, {projection:{_id: 0}}, function (err, result){ 
+        if (err) return console.log(err)
+        res.status(200)
+        res.send(result)
+    });
 }); 
 
 function cssubscriptionExistsInDB (id, req, res) {

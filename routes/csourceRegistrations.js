@@ -36,11 +36,11 @@ router.get('/csourceRegistrations', auth.checkToken, function(req, res) {
 });
 
 router.get('/csourceRegistrations/:csourceRegistrationId', auth.checkToken, function(req, res) {
-	db.collection('csourceRegistrations').find({'id': req.params.csourceRegistrationId}).project({_id:0}).toArray(function (err, result){ 
+	db.collection('csourceRegistrations').findOne({'id': req.params.csourceRegistrationId}, {projection:{_id: 0}}, function (err, result){ 
     	if (err) return console.log(err)
 		res.status(200)
 		res.send(result)
-	})
+	}); 
 }); 
 
 function  csRegistrationExistsInDB (id, req, res) {

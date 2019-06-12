@@ -81,14 +81,13 @@ router.get('/entities', auth.checkToken, function(req, res) {
 });
 
 router.get('/entities/:entityId', auth.checkToken, function(req, res) {
-    db.collection('entities').find({'id': req.params.entityId}).project({_id: 0}).toArray(function (err, result) {
+    db.collection('entities').findOne({'id': req.params.entityId}, {projection:{_id: 0}}, function (err, result) {
         if (err) {
             return console.log(err);
         } else {
             res.status(200);
-            res.send(result);
-        }
-    })
+            res.json(result);
+        }}); 
 });
 
 function entityExistsInDB (id, res, req) {

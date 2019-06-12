@@ -38,7 +38,7 @@ router.get('/subscriptions', auth.checkToken, function(req, res) {
 });
 
 router.get('/subscriptions/:subscriptionId',auth.checkToken, function(req, res) {
-	db.collection('subscriptions').find({'id': req.params.subscriptionId}).project({_id:0}).toArray(function (err, result){ 
+	db.collection('subscriptions').findOne({'id': req.params.subscriptionId}, {projection:{_id: 0}}, function (err, result){ 
 		if (err) {
 			return console.log(err);
 		} else {
