@@ -28,7 +28,7 @@ const apiversion = 'v1';
 const basePath = apiName + '/' + apiversion; 
 const username = "admin"; 
 const password = "admin4djane"; 
-const authentication = false; 
+const authentication = true; 
 
 module.exports = {
     serverPort,

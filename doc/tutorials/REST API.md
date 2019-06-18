@@ -528,20 +528,20 @@ changes, a new notification (including the new speed value) will be transmitted 
 * Here is an example of the Notification representation.
 
     {
-        "id": "urn:ngsi-ld:Notif:mySubscription", 
+        "id": "urn:ngsi-ld:Notification:notifiction123",
         "type": "Notification",
-        "notifiedAt" : "2018-12-29T14:05:02Z", 
+        "notifiedAt": "2018-12-29T14:05:02Z",
         "data" : [
             {
-                "id": "urn:ngsi-ld:Vehicle:A4567",
-                "speed": {
-                    "type": "Property",
-                    "value": 72,
-                    "accuracy": {
+                    "id": "urn:ngsi-ld:Vehicle:A4567",
+                    "speed": {
                         "type": "Property",
-                        "value": 0.9
+                        "value": 72,
+                        "accuracy": {
+                            "type": "Property",
+                            "value": 0.9
+                        }
                     }
-                }
             }
         ]
     }
