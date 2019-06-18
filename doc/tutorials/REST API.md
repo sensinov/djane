@@ -525,7 +525,7 @@ changes, a new notification (including the new speed value) will be transmitted 
 
     HTTP/1.1 204 No Content
 
-* Here is an example of the Notification representation.
+Here is an example of the Notification representation.
 
     {
         "id": "urn:ngsi-ld:Notification:notifiction123",
