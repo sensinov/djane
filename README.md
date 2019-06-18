@@ -1,6 +1,9 @@
 # djane 
 Open source implementation of ETSI ISG CIM standard known as NGSI-LD. An information model, representation format and open API intended to make it easier for end-users, IoT devices, open data sources and 3rd-party applications to exchange information.
 
+## Tutorials 
+[Smart parking sample](https://github.com/sensinov/djane/blob/master/tutorials/REST%20API.md)  
+
 ## Prerequisites
 * Node.js (https://nodejs.org)
 * MongoDB (https://www.mongodb.com)
