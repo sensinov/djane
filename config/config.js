@@ -28,6 +28,7 @@ const apiversion = 'v1';
 const basePath = apiName + '/' + apiversion; 
 const username = "admin"; 
 const password = "admin4djane"; 
+const authentication = false; 
 
 module.exports = {
     serverPort,
@@ -35,5 +36,6 @@ module.exports = {
     DataBaseName, 
     basePath, 
     username, 
-    password
+    password, 
+    authentication
 }

@@ -5,40 +5,45 @@ let db;
 
 const bcrypt = require('bcrypt');
 let config = require('./config');
-
+let auth= require ('../config/config')
 
 function checkToken (req, res, next) {
   let token = req.headers['x-access-token'] || req.headers['x-auth-token']; 
-  if (token !== undefined) {
-    if (token.startsWith('Bearer')) {
-      // Remove Bearer from string
-      token = token.slice(7, token.length);
-    }
-  
-    if (token) {
-      jwt.verify(token, config.secret, (err, decoded) => {
-        if (err) {
-          return res.json({
-            success: false,
-            message: 'Token is not valid'
-          });
-        } else {
-          req.decoded = decoded;
-          next();
-        }
-      });
+  if (auth.authentication) {
+    if (token !== undefined) {
+      if (token.startsWith('Bearer')) {
+        // Remove Bearer from string
+        token = token.slice(7, token.length);
+      }
+    
+      if (token) {
+        jwt.verify(token, config.secret, (err, decoded) => {
+          if (err) {
+            return res.json({
+              success: false,
+              message: 'Token is not valid'
+            });
+          } else {
+            req.decoded = decoded;
+            next();
+          }
+        });
+      } else {
+        return res.json({
+          success: false,
+          message: 'Auth token is not supplied'
+        });
+      }
     } else {
       return res.json({
         success: false,
-        message: 'Auth token is not supplied'
+        message: 'Auth token is missing!'
       });
     }
   } else {
-    return res.json({
-      success: false,
-      message: 'Auth token is missing!'
-    });
+    next(); 
   }
+  
  
 };
 
