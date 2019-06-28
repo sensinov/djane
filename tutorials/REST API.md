@@ -41,6 +41,7 @@ The following HTTP request creates a csourceRegistration resource which describe
     POST /ngsi-ld/v1/csourceRegistrations/ HTTP/1.1
     Host: localhost:3000
     Content-Type: application/ld+json
+    Content-Length: 1805
     Accept: application/ld+json
 
     {
@@ -136,6 +137,7 @@ The following HTTP request creates a vehicle entity with the id *urn:ngsi-ld:Veh
     POST /ngsi-ld/v1/entities/ HTTP/1.1
     Host: localhost:3000
     Content-Type: application/ld+json
+    Content-Length: 683
     Accept: application/ld+json
 
     {
@@ -181,6 +183,7 @@ The following HTTP request creates a offStreetParking entity with the id *urn:ng
     POST /ngsi-ld/v1/entities/ HTTP/1.1
     Host: localhost:3000
     Content-Type: application/ld+json
+    Content-Length: 751
     Accept: application/ld+json
 
     {
@@ -227,6 +230,7 @@ If the creation was successful, the response with HTTP return code *201 Created*
     POST /ngsi-ld/v1/entities/ HTTP/1.1
     Host: localhost:3000
     Content-Type: application/ld+json
+    Content-Length: 511
     Accept: application/ld+json
 
     {
@@ -444,6 +448,7 @@ This example shows how to append a new attribute (*speed* property) to an existi
     POST /ngsi-ld/v1/entities/urn:ngsi-ld:Vehicle:A4567/attrs HTTP/1.1
     Host: localhost:3000
     Content-Type: application/ld+json
+    Content-Length: 198
 
     {
         "speed": {
@@ -469,6 +474,11 @@ This example shows how to append a new attribute (*speed* property) to an existi
 changes, a new notification (including the new speed value) will be transmitted to the specified endpoint.
 
 **HTTP Request**
+
+    POST /ngsi-ld/v1/subscriptions HTTP/1.1
+    Host: localhost:3000
+    Content-Type: application/ld+json
+    Content-Length: 664
 
     {
         "id": "urn:ngsi-ld:Subscription:mySubscription",
@@ -508,6 +518,7 @@ changes, a new notification (including the new speed value) will be transmitted 
     PATCH http://127.0.0.1:3000/ngsi-ld/v1/entities/urn:ngsi-ld:Vehicle:A4567/attrs/speed
     Host: localhost:3000
     Content-Type: application/ld+json
+    Content-Length: 241
 
     {
         "id": "urn:ngsi-ld:Vehicle:A4567",

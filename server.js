@@ -53,7 +53,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 var checker = function (req, res, next) {
 	var headerAccept=req.header('Accept');
 	const headerRegExp=RegExp('.*/.*'); 
-	var headerContentType=req.header('Content-Type')
+	var headerContentType=req.header('Content-Type'); 
+	var headerContentLength=req.header('Content-Length'); 
 	if (req.method == "GET") {
 		if ((headerRegExp.test(headerAccept)) || (headerAccept === 'undefined')) {
 			next();
@@ -62,11 +63,16 @@ var checker = function (req, res, next) {
 			res.send('Please Check Accept request header');
 		}
 	} else if ((req.method == "POST") || (req.method == "PATCH")) {
-		if ((headerContentType == 'application/ld+json') || (headerContentType == 'application/json')) {
-			next();
+		if (headerContentLength === undefined) {
+			res.status(411);
+			res.send('Please Check Content-Length request header');
 		} else {
-			res.status(400);
-			res.send('Please Check Content-Type request header');
+			if ((headerContentType == 'application/ld+json') || (headerContentType == 'application/json')) {
+				next();
+			} else {
+				res.status(400);
+				res.send('Please Check Content-Type request header');
+			} 
 		}
 	} else if (req.method == "DELETE") {
 		next();
