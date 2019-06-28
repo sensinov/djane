@@ -1,5 +1,5 @@
 ## Smart parking sample  
-As use case, we consider a context information management system related to transport. The entity types used in the example are: Vehicle, offStreetParking, Person, and Camera. The figure below illustrates the entities instances and their related properties and relationshiphis.  
+As use case, we consider a context information management system related to transport. The entity types used in the example are: Vehicle, offStreetParking, Person, and Camera. The figure below illustrates the entities instances and their related properties and relationshiphis.  [source](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf)
 
 <p align="center">
 <img src="./figures/example.png" />
