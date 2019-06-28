@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "NGSI-LD Context Broker",
   "main": "server.js",
+  "license": "EPL-1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/sensinov/djane"

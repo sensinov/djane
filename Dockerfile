@@ -1,4 +1,4 @@
-FROM node:slim
+FROM node
 
 WORKDIR /usr/src/app
 
@@ -14,6 +14,9 @@ ENV SERVER_PORT=3000
 
 # The mongodb is configured via the variables below
 ENV DB_SERVER=mongodb:// DB_HOST=mongo DB_PORT=27017 DATABASE_NAME=ngsi_ld_bd
+
+
+ENV AUTH=true
 
 #CMD [ "npm", "start" ]
 CMD npm run migrate ; npm start

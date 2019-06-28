@@ -21,14 +21,18 @@ const serverPort = +process.env.SERVER_PORT || 3000;
 const dbServer = process.env.DB_SERVER || 'mongodb://';
 const dbHost = process.env.DB_HOST || '127.0.0.1';
 const dbPort = process.env.DB_PORT || '27017';
-const DataBaseName = process.env.DATABASE_NAME || 'ngsi_ld_bd';
+const DataBaseName = process.env.DATABASE_NAME || 'ngsi_ld_bd'; 
 const mongoDBHost = dbServer + dbHost + ':' + dbPort + '/' + DataBaseName;
+
 const apiName = '/ngsi-ld'; 
 const apiversion = 'v1'; 
 const basePath = apiName + '/' + apiversion; 
 const username = "admin"; 
-const password = "admin4djane"; 
-const authentication = true; 
+const password = "admin4djane";
+let authentication=true;
+if(process.env.AUTH === "false"){
+    authentication=false;
+}
 
 module.exports = {
     serverPort,
