@@ -1,9 +1,17 @@
-FROM node
-
-WORKDIR /usr/src/app
+FROM node:latest AS build
+WORKDIR /build
 
 COPY package*.json ./
 RUN npm install --production
+
+# Use the node:slim base image to save 600mb space
+FROM node:slim
+WORKDIR /usr/src/app
+
+# Copy the node modules and compiled C/C++ libraries
+COPY --from=build /build /usr/src/app
+
+# Copy JavaScript and everything else
 COPY . .
 
 # Download a wait program, used with docker-compose
@@ -15,7 +23,7 @@ ENV SERVER_PORT=3000
 # The mongodb is configured via the variables below
 ENV DB_SERVER=mongodb:// DB_HOST=mongo DB_PORT=27017 DATABASE_NAME=ngsi_ld_bd
 
-
+# Use JWT authentication or not
 ENV AUTH=true
 
 #CMD [ "npm", "start" ]
