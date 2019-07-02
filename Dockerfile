@@ -21,7 +21,7 @@ RUN curl -sO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait
 ENV SERVER_PORT=3000
 
 # The mongodb is configured via the variables below
-ENV DB_SERVER=mongodb:// DB_HOST=mongo DB_PORT=27017 DATABASE_NAME=ngsi_ld_bd
+ENV DB_CONNECTION_URI=mongodb://mongo:27017
 
 # Use JWT authentication or not
 ENV AUTH=true

@@ -18,11 +18,8 @@
 const serverPort = +process.env.SERVER_PORT || 3000;
 
 //MongoDB config
-const dbServer = process.env.DB_SERVER || 'mongodb://';
-const dbHost = process.env.DB_HOST || '127.0.0.1';
-const dbPort = process.env.DB_PORT || '27017';
-const DataBaseName = process.env.DATABASE_NAME || 'ngsi_ld_bd'; 
-const mongoDBHost = dbServer + dbHost + ':' + dbPort + '/' + DataBaseName;
+const dbName =  'ngsi_ld_bd'; 
+const mongoDBHost = process.env.DB_CONNECTION_URI || 'mongodb://127.0.0.1:27017';
 
 const apiName = '/ngsi-ld'; 
 const apiversion = 'v1'; 
@@ -37,7 +34,7 @@ if(process.env.AUTH === "false"){
 module.exports = {
     serverPort,
     mongoDBHost,
-    DataBaseName, 
+    dbName, 
     basePath, 
     username, 
     password, 
