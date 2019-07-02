@@ -12,7 +12,6 @@ Property graph
 * [Entities registration](#entitiesRegistration)
 * [Entities creation](#entitiesCreation)
 * [Retrieve entities](#getEntities)
-* [Querying entities](#qEntities)
 * [Update entity](#put)
 * [Subscribe to entities](#subscribe)
 
@@ -268,133 +267,7 @@ If the creation was successful, the response with HTTP return code *201 Created*
 <a name="getEntities"></a>
 ## Retrieve entities 
 
-### Retrieve all entities
-Now that the Vehicle, OffStreetParking and Person entities have been created, they can be retrieved. 
-
-**HTTP Request**
-
-    GET /ngsi-ld/v1/entities/
-    Host: localhost:3000
-    Accept: application/json+ld
-
-**HTTP Response**
-
-    HTTP/1.1 200 OK
-    Content-Type: application/json+ld
-
-    [
-       {
-            "id": "urn:ngsi-ld:Vehicle:A4567",
-            "type": "Vehicle",
-            "brandName": {
-                "type": "Property",
-                "value": "Mercedes"
-            },
-            "isParked": {
-                "type": "Relationship",
-                "object": "urn:ngsi-ld:OffStreetParking:Downtown1",
-                "observedAt": "2018-12-29T12:00:04Z",
-                "providedBy": {
-                    "type": "Relationship",
-                    "object": "urn:ngsi-ld:Person:Bob"
-                }
-            },
-            "@context": [
-                "http://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
-                "http://example.org/ngsi-ld/commonTerms.jsonld",
-                "http://example.org/ngsi-ld/vehicle.jsonld",
-                "http://example.org/ngsi-ld/parking.jsonld"
-            ]
-        }, 
-        {
-            "id": "urn:ngsi-ld:OffStreetParking:Downtown1",
-            "type": "OffStreetParking",
-            "name": {
-                "type": "Property",
-                "value": "Downtown One"
-            },
-            "availableSpotNumber": {
-                "type": "Property",
-                "value": 121,
-                "observedAt": "2018-12-29T12:05:02Z",
-                "reliability": {
-                    "type": "Property",
-                    "value": 0.7
-                },
-                "providedBy": {
-                    "type": "Relationship",
-                    "object": "urn:ngsi-ld:Camera:C1"
-                }
-            },
-            "@context": [
-                "http://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
-                "http://example.org/ngsi-ld/parking.jsonld"
-            ]
-        }, 
-        {
-            "id": "urn:ngsi-ld:Person:Bob", 
-            "type" : "Person",
-            "firstName": {
-                "type": "Property", 
-                "value": "Bob"
-            }, 
-            "lastName": {
-                "type": "Property", 
-                "value" : "Doe"
-            }, 
-            "age": {
-                "type" : "Property", 
-                "value" : 22
-            }
-            "@context": [
-                "http://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
-                "https://example.com/person.schema.json",
-            ]
-        }
-    ]
-
-### Retrieve a specific entity
-
-To get the Vehicle entity with id *urn:ngsi-ld:Vehicle:A4567*, execute the following request. 
-
-**HTTP Request**
-
-    GET /ngsi-ld/v1/entities/urn:ngsi-ld:Vehicle:A4567
-    Host: localhost:3000
-    Accept: application/json+ld
-
-**HTTP Response**
-
-    HTTP/1.1 200 OK
-    Content-Type: application/json+ld
-
-    {
-        "id": "urn:ngsi-ld:Vehicle:A4567",
-        "type": "Vehicle",
-        "brandName": {
-            "type": "Property",
-            "value": "Mercedes"
-        },
-        "isParked": {
-            "type": "Relationship",
-            "object": "urn:ngsi-ld:OffStreetParking:Downtown1",
-            "observedAt": "2018-12-29T12:00:04Z",
-            "providedBy": {
-                "type": "Relationship",
-                "object": "urn:ngsi-ld:Person:Bob"
-            }
-        },
-        "@context": [
-            "http://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
-            "http://example.org/ngsi-ld/commonTerms.jsonld",
-            "http://example.org/ngsi-ld/vehicle.jsonld",
-            "http://example.org/ngsi-ld/parking.jsonld"
-        ]
-    }
-
-
-<a name="qEntities"></a>
-## Querying entities
+### Querying entities
 
 This example queries all NGSI-LD entities of type OffStreetParking including all available properties and relationships.
 
@@ -436,6 +309,46 @@ This example queries all NGSI-LD entities of type OffStreetParking including all
             ]
         }
     ]
+
+
+### Retrieve a specific entity
+
+To get the Vehicle entity with id *urn:ngsi-ld:Vehicle:A4567*, execute the following request. 
+
+**HTTP Request**
+
+    GET /ngsi-ld/v1/entities/urn:ngsi-ld:Vehicle:A4567
+    Host: localhost:3000
+    Accept: application/json+ld
+
+**HTTP Response**
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json+ld
+
+    {
+        "id": "urn:ngsi-ld:Vehicle:A4567",
+        "type": "Vehicle",
+        "brandName": {
+            "type": "Property",
+            "value": "Mercedes"
+        },
+        "isParked": {
+            "type": "Relationship",
+            "object": "urn:ngsi-ld:OffStreetParking:Downtown1",
+            "observedAt": "2018-12-29T12:00:04Z",
+            "providedBy": {
+                "type": "Relationship",
+                "object": "urn:ngsi-ld:Person:Bob"
+            }
+        },
+        "@context": [
+            "http://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
+            "http://example.org/ngsi-ld/commonTerms.jsonld",
+            "http://example.org/ngsi-ld/vehicle.jsonld",
+            "http://example.org/ngsi-ld/parking.jsonld"
+        ]
+    }
 
 
 <a name="put"></a>
