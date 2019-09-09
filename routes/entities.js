@@ -145,7 +145,7 @@ router.patch('/entities/:entityId/attrs', auth.checkToken, function (req, res) {
         if (err) {
             return console.log(err);
         } else {
-            es.status(204);
+            res.status(204);
             res.send({message: '204 No Content'});
         }
     })
