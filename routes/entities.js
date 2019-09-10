@@ -85,8 +85,13 @@ router.get('/entities/:entityId', auth.checkToken, function(req, res) {
         if (err) {
             return console.log(err);
         } else {
-            res.status(200);
-            res.json(result);
+            if (result == null ){
+                res.status(404); 
+                res.json({message: 'Resource Not Found'}); 
+            } else {
+                res.status(200);
+                res.json(result);
+            }        
         }}); 
 });
 
