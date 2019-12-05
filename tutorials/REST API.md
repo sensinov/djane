@@ -42,75 +42,82 @@ The following HTTP request creates a csourceRegistration resource which describe
     Content-Type: application/ld+json
     Content-Length: 1805
     Accept: application/ld+json
+    X-AUTH-TOKEN : token
 
     {
-        "id": "urn:ngsi-ld:ContextSourceRegistration:csr1a3456",
-        "type": "ContextSourceRegistration",
-        "information": [
-            {
-                "entities": [
-                    {
-                        "id": "urn:ngsi-ld:Vehicle:A4567",
-                        "type": "Vehicle"
-                    }
-                ],
-                "properties": [
-                    "brandName"
-                ],
-                "relationships": [
-                    "isParked"
-                ]
-            },
-            {
-                "entities": [
-                    {
-                        "idPattern": ".*downtown$",
-                        "type": "OffStreetParking"
-                    }
-                ],
-                "properties": [
-                    "availableSpotNumber",
-                ],
-            }
-        ],
-        "endpoint": "http://my.csource.org:3002",
-        "location": {
-            "type": "Polygon",
-            "coordinates": [
-            [
-                [
-                100.0,
-                0.0
-                ],
-                [
-                101.0,
-                0.0
-                ],
-                [
-                101.0,
-                1.0
-                ],
-                [
-                100.0,
-                1.0
-                ],
-                [
-                100.0,
-                0.0
-                ]
-            ]
+    "id": "urn:ngsi-ld:ContextSourceRegistration:csr1a3456",
+    "type": "ContextSourceRegistration",
+    "information": [
+        {
+            "entities": [
+                {
+                    "id": "urn:ngsi-ld:Vehicle:A4567",
+                    "type": "Vehicle"
+                }
+            ],
+            "properties": [
+                "brandName"
+            ],
+            "relationships": [
+                "isParked"
             ]
         },
-        "timestamp": [{
-            "start": "2018-11-22T14:53:15Z"
-        }],
-        "@context": [
-            "http://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
-            "http://example.org/ngsi-ld/commonTerms.jsonld",
-            "http://example.org/ngsi-ld/vehicle.jsonld",
-            "http://example.org/ngsi-ld/parking.jsonld"
+        {
+            "entities": [
+                {
+                    "idPattern": ".*downtown$",
+                    "type": "OffStreetParking"
+                }
+            ],
+            "properties": [
+                "availableSpotNumber"
+            ], 
+             "relationships": [
+            ]
+        }
+    ],
+    "endpoint": "http://my.csource.org:3002",
+    "location": {
+        "type": "GeoProperty",
+        "value" : {
+        	"type" : "Polygon",
+        	"coordinates": [
+        [
+            [
+            100.0,
+            0.0
+            ],
+            [
+            101.0,
+            0.0
+            ],
+            [
+            101.0,
+            1.0
+            ],
+            [
+            100.0,
+            1.0
+            ],
+            [
+            100.0,
+            0.0
+            ]
         ]
-    }
+        ]
+        }
+        
+    },
+    "timestamp": [{
+        "start": "2018-11-22T14:53:15Z"
+    }],
+    "@context": [
+        "http://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
+        "http://example.org/ngsi-ld/commonTerms.jsonld",
+        "http://example.org/ngsi-ld/vehicle.jsonld",
+        "http://example.org/ngsi-ld/parking.jsonld"
+    ]
+}
 
 **HTTP Response**
 
