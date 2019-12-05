@@ -145,6 +145,7 @@ The following HTTP request creates a vehicle entity with the id *urn:ngsi-ld:Veh
     Content-Type: application/ld+json
     Content-Length: 683
     Accept: application/ld+json
+    x-AUTH_TOKEN: token 
 
     {
         "id": "urn:ngsi-ld:Vehicle:A4567",
@@ -191,7 +192,8 @@ The following HTTP request creates a offStreetParking entity with the id *urn:ng
     Content-Type: application/ld+json
     Content-Length: 751
     Accept: application/ld+json
-
+    X-AUTH-TOKEN: token 
+    
     {
         "id": "urn:ngsi-ld:OffStreetParking:Downtown1",
         "type": "OffStreetParking",
@@ -238,6 +240,7 @@ If the creation was successful, the response with HTTP return code *201 Created*
     Content-Type: application/ld+json
     Content-Length: 511
     Accept: application/ld+json
+    X-AUTH-TOKEN: token 
 
     {
         "id": "urn:ngsi-ld:Person:Bob", 
@@ -252,11 +255,11 @@ If the creation was successful, the response with HTTP return code *201 Created*
         }, 
         "age": {
             "type" : "Property", 
-            "value" : 22
+            "value" : 22,
         }
         "@context": [
             "http://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
-            "https://example.com/person.schema.json",
+            "https://example.com/person.schema.json"
         ]
     }
 
