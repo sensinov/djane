@@ -117,7 +117,7 @@ The following HTTP request creates a csourceRegistration resource which describe
         "http://example.org/ngsi-ld/vehicle.jsonld",
         "http://example.org/ngsi-ld/parking.jsonld"
     ]
-}
+    }
 
 **HTTP Response**
 
