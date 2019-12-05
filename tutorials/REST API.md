@@ -255,8 +255,8 @@ If the creation was successful, the response with HTTP return code *201 Created*
         }, 
         "age": {
             "type" : "Property", 
-            "value" : 22,
-        }
+            "value" : 22
+        },
         "@context": [
             "http://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld",
             "https://example.com/person.schema.json"
