@@ -42,7 +42,7 @@ The following HTTP request creates a csourceRegistration resource which describe
     Content-Type: application/ld+json
     Content-Length: 1805
     Accept: application/ld+json
-    X-AUTH-TOKEN : token
+    Authorization : Bearer token
 
     {
     "id": "urn:ngsi-ld:ContextSourceRegistration:csr1a3456",
@@ -145,7 +145,7 @@ The following HTTP request creates a vehicle entity with the id *urn:ngsi-ld:Veh
     Content-Type: application/ld+json
     Content-Length: 683
     Accept: application/ld+json
-    x-AUTH_TOKEN: token 
+    Authorization : Bearer token 
 
     {
         "id": "urn:ngsi-ld:Vehicle:A4567",
@@ -192,7 +192,7 @@ The following HTTP request creates a offStreetParking entity with the id *urn:ng
     Content-Type: application/ld+json
     Content-Length: 751
     Accept: application/ld+json
-    X-AUTH-TOKEN: token 
+    Authorization : Bearer token 
     
     {
         "id": "urn:ngsi-ld:OffStreetParking:Downtown1",
@@ -240,7 +240,7 @@ If the creation was successful, the response with HTTP return code *201 Created*
     Content-Type: application/ld+json
     Content-Length: 511
     Accept: application/ld+json
-    X-AUTH-TOKEN: token 
+    Authorization : Bearer token 
 
     {
         "id": "urn:ngsi-ld:Person:Bob", 
@@ -286,6 +286,7 @@ This example queries all NGSI-LD entities of type OffStreetParking including all
     GET /ngsi-ld/v1/entities?type=OffStreetParking
     Host: localhost:3000
     Accept: application/json+ld
+    Authorization : Bearer token
 
 **HTTP Response**
 
@@ -330,6 +331,7 @@ To get the Vehicle entity with id *urn:ngsi-ld:Vehicle:A4567*, execute the follo
     GET /ngsi-ld/v1/entities/urn:ngsi-ld:Vehicle:A4567
     Host: localhost:3000
     Accept: application/json+ld
+    Authorization : Bearer token
 
 **HTTP Response**
 
@@ -372,6 +374,7 @@ This example shows how to append a new attribute (*speed* property) to an existi
     Host: localhost:3000
     Content-Type: application/ld+json
     Content-Length: 198
+    Authorization : Bearer token
 
     {
         "speed": {
@@ -402,6 +405,7 @@ changes, a new notification (including the new speed value) will be transmitted 
     Host: localhost:3000
     Content-Type: application/ld+json
     Content-Length: 664
+    Authorization : Bearer token
 
     {
         "id": "urn:ngsi-ld:Subscription:mySubscription",
@@ -442,6 +446,7 @@ changes, a new notification (including the new speed value) will be transmitted 
     Host: localhost:3000
     Content-Type: application/ld+json
     Content-Length: 241
+    Authorization : Bearer token
 
     {
         "id": "urn:ngsi-ld:Vehicle:A4567",
