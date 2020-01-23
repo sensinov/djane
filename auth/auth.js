@@ -26,7 +26,7 @@ let config = require('./config');
 let auth= require ('../config/config')
 
 function checkToken (req, res, next) {
-  let token = req.headers['x-access-token'] || req.headers['x-auth-token']; 
+  let token = req.headers['x-access-token'] || req.headers['x-auth-token'] || req.headers['authorization']; 
   if (auth.authentication) {
     if (token !== undefined) {
       if (token.startsWith('Bearer')) {
@@ -71,6 +71,8 @@ function authenticate (req, res, next) {
   db.collection('users').findOne({'username':req.body.username}, function(err, user){
       if (err) {
           next(err);
+      } else if (user === null) {
+        res.status(404).send({error: {message : 'User not found'}}); 
       } else {
           if(bcrypt.compareSync(req.body.password, user.password)) {
               let token = jwt.sign({username: username},
@@ -86,10 +88,11 @@ function authenticate (req, res, next) {
                 });
                 next(); 
           }else{
-              res.send(403).json({
+              res.status(403).json(
+		{ error : {
                   success: false,
                   message: 'Incorrect username or password'
-                });
+                }});
           }
       }
   });

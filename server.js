@@ -18,7 +18,15 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+
+// Import the library:
+var cors = require('cors');
+
 const app = express();
+
+// Then use it before your routes are set up:
+app.use(cors()); 
+
 const createError = require('http-errors');
 const config = require ('./config/config');
 const mongo = require ('./lib/mongo'); 
@@ -124,7 +132,7 @@ function bootstrap (){
 		//entities temporal evolution Router
 		app.use(config.basePath, temporalRouter); 
 
-		const serer=app.listen(config.serverPort, function () {
+		const server=app.listen(config.serverPort, function () {
 			console.log('Listening on port: ' + config.serverPort);
 		});
 	}); 
