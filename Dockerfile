@@ -4,6 +4,9 @@ WORKDIR /build
 COPY package*.json ./
 RUN npm install --production
 
+# Download a wait program, used with docker-compose
+RUN curl -sO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && chmod +x ./wait-for-it.sh
+
 # Use the node:slim base image to save 600mb space
 FROM node:slim
 WORKDIR /usr/src/app
@@ -13,9 +16,6 @@ COPY --from=build /build /usr/src/app
 
 # Copy JavaScript and everything else
 COPY . .
-
-# Download a wait program, used with docker-compose
-RUN curl -sO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && chmod +x ./wait-for-it.sh
 
 # The SERVER_PORT is the port exposed by the service
 ENV SERVER_PORT=3000
