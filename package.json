@@ -25,7 +25,7 @@
     "isuri": "^2.0.3",
     "jest": "^24.8.0",
     "jsonschema": "^1.2.4",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongodb": "^3.1.10",
     "request": "^2.88.0"
   },
